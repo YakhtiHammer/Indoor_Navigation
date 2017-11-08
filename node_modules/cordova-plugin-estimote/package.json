@@ -1,0 +1,92 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "https://github.com/evothings/phonegap-estimotebeacons.git",
+        "scope": null,
+        "escapedName": null,
+        "name": null,
+        "rawSpec": "https://github.com/evothings/phonegap-estimotebeacons.git",
+        "spec": "git+https://github.com/evothings/phonegap-estimotebeacons.git",
+        "type": "hosted",
+        "hosted": {
+          "type": "github",
+          "ssh": "git@github.com:evothings/phonegap-estimotebeacons.git",
+          "sshUrl": "git+ssh://git@github.com/evothings/phonegap-estimotebeacons.git",
+          "httpsUrl": "git+https://github.com/evothings/phonegap-estimotebeacons.git",
+          "gitUrl": "git://github.com/evothings/phonegap-estimotebeacons.git",
+          "shortcut": "github:evothings/phonegap-estimotebeacons",
+          "directUrl": "https://raw.githubusercontent.com/evothings/phonegap-estimotebeacons/master/package.json"
+        }
+      },
+      "C:\\wamp\\www\\meteo\\new\\node_modules"
+    ]
+  ],
+  "_from": "git+https://github.com/evothings/phonegap-estimotebeacons.git",
+  "_id": "cordova-plugin-estimote@0.8.0",
+  "_inCache": true,
+  "_location": "/cordova-plugin-estimote",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "https://github.com/evothings/phonegap-estimotebeacons.git",
+    "scope": null,
+    "escapedName": null,
+    "name": null,
+    "rawSpec": "https://github.com/evothings/phonegap-estimotebeacons.git",
+    "spec": "git+https://github.com/evothings/phonegap-estimotebeacons.git",
+    "type": "hosted",
+    "hosted": {
+      "type": "github",
+      "ssh": "git@github.com:evothings/phonegap-estimotebeacons.git",
+      "sshUrl": "git+ssh://git@github.com/evothings/phonegap-estimotebeacons.git",
+      "httpsUrl": "git+https://github.com/evothings/phonegap-estimotebeacons.git",
+      "gitUrl": "git://github.com/evothings/phonegap-estimotebeacons.git",
+      "shortcut": "github:evothings/phonegap-estimotebeacons",
+      "directUrl": "https://raw.githubusercontent.com/evothings/phonegap-estimotebeacons/master/package.json"
+    }
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "git+https://github.com/evothings/phonegap-estimotebeacons.git#eed09405b5435a0b9e76e9094f52350991c51b91",
+  "_shasum": "27053dd0271ca6e3a13de113b41dc78527b8ce2a",
+  "_shrinkwrap": null,
+  "_spec": "https://github.com/evothings/phonegap-estimotebeacons.git",
+  "_where": "C:\\wamp\\www\\meteo\\new\\node_modules",
+  "author": {
+    "name": "Evothings"
+  },
+  "bugs": {
+    "url": "https://github.com/evothings/phonegap-estimotebeacons/issues"
+  },
+  "cordova": {
+    "id": "cordova-plugin-estimote",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "dependencies": {},
+  "description": "Cordova/PhoneGap plugin for Estimote beacons.",
+  "devDependencies": {},
+  "gitHead": "eed09405b5435a0b9e76e9094f52350991c51b91",
+  "homepage": "https://github.com/evothings/phonegap-estimotebeacons#readme",
+  "keywords": [
+    "Estimote",
+    "Beacons",
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios"
+  ],
+  "license": "MIT",
+  "name": "cordova-plugin-estimote",
+  "optionalDependencies": {},
+  "readme": "# This plugin is no longer maintained - new maintainer is welcome!\r\n\r\nSadly we don't have the time to maintain this plugin. We recommend using the iBeacon plugin by Peter Metz, which works nicely with Estimote beacons. This plugin can be found here: https://github.com/petermetz/cordova-plugin-ibeacon\r\n\r\nIf you are interested in taking over maintanance/ownership of the plugin, please contact us at info@evothings.com\r\n\r\n## About the Estimote Cordova/PhoneGap plugin\r\n\r\nThis plugin makes it easy to develop Cordova apps for Estimote Beacons and Estimote Stickers. Use JavaScript and HTML to develop stunning apps that take advantage of the capabilities of Estimote Beacons and Stickers.\r\n\r\n![Estimote Beacons](http://evomedia.evothings.com/2014/09/estimote-beacons-group-small.jpg)\r\n\r\n## Updated API\r\n\r\nThe JavaScript API has been updated. Please note that the new API is not backwards compatible. The original API is available in the branch \"0.1.0\".\r\n\r\nAs of version 0.6.0 the API consists of two modules, \"estimote.beacons\" and \"estimote.nearables\", with support for Estimote Beacons and Estimote Stickers. \"EstimoteBeacons\" is kept for backwards compatibility, and points to \"estimote.beacons\".\r\n\r\nA change log is found in file [changelog.md](changelog.md).\r\n\r\n## Beacon Finder example app\r\n\r\nTry out the Beacon Finder example app, which is available in the examples folder in this repository. Find out more in the [README file](examples/beacon-finder/README.md) and look into the details of the [example source code](examples/beacon-finder/www/).\r\n\r\n## How to create an app using the plugin\r\n\r\nSee the instructions in the Beacon Finder [README file](examples/beacon-finder/README.md).\r\n\r\n## Documentation\r\n\r\nThe file [documentation.md](documentation.md) contains an overview of the plugin API.\r\n\r\nDocumentation of all functions is available in the JavaScript API implementation file [EstimoteBeacons.js](plugin/src/js/EstimoteBeacons.js).\r\n\r\n## Credits\r\n\r\nMany thanks goes to [Konrad Dzwinel](https://github.com/kdzwinel) who developed the original version of this plugin and provided valuable support and advice for the redesign of the plugin.\r\n\r\nMany thanks also to all contributors! https://github.com/evothings/phonegap-estimotebeacons/pulls?q=is%3Apr+is%3Aclosed\r\n",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/evothings/phonegap-estimotebeacons.git"
+  },
+  "version": "0.8.0"
+}

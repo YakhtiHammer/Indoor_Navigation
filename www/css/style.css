@@ -1,0 +1,666 @@
+/* line 17, ../../../../../lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+/* line 22, ../../../../../lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html {
+  line-height: 1;
+}
+
+/* line 24, ../../../../../lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+  list-style: none;
+}
+
+/* line 26, ../../../../../lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 28, ../../../../../lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+/* line 30, ../../../../../lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+  quotes: none;
+}
+/* line 103, ../../../../../lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+/* line 32, ../../../../../lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+a img {
+  border: none;
+}
+
+/* line 116, ../../../../../lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+  display: block;
+}
+
+/* line 13, style.scss */
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  outline: none;
+}
+
+/* line 18, style.scss */
+a {
+  color: #11a7ab;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* line 24, style.scss */
+input, textarea {
+  border: none;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  -ms-border-radius: 0px;
+  -o-border-radius: 0px;
+  border-radius: 0px;
+}
+
+/* line 30, style.scss */
+body {
+  color: #8f99b7;
+  font-family: "Ubuntu";
+  font-size: 16px;
+  background-color: #f2f2f4;
+}
+
+/* line 37, style.scss */
+h1 {
+  font-size: 28px;
+  text-align: center;
+  color: #fff;
+  font-weight: bold;
+  margin: 45px 0;
+  display: none;
+}
+
+/* line 46, style.scss */
+p {
+  margin: 1em 0px;
+  overflow: hidden;
+  *zoom: 1;
+  line-height: 24px;
+}
+
+/* line 52, style.scss */
+.chapo {
+  font-weight: bold;
+}
+
+/* line 56, style.scss */
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* line 61, style.scss */
+input.text, textarea.text {
+  display: block;
+  width: 100%;
+  height: 48px;
+  border: 1px solid #1073b4;
+  background-color: #fff;
+  color: #000;
+  font-size: 16px;
+  padding-left: 10px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-background-clip: padding;
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+}
+/* line 73, style.scss */
+input.text:focus, textarea.text:focus {
+  border: 1px solid #11a7ab;
+}
+
+/* line 78, style.scss */
+textarea.text {
+  height: 150px;
+  padding-top: 15px;
+}
+
+/* line 83, style.scss */
+input.submit, .btn {
+  display: inline-block;
+  padding: 0 5px;
+  height: 50px;
+  line-height: 50px;
+  border: none;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 16px;
+  color: #fff;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-background-clip: padding;
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+  background-color: #1073b4;
+  float: right;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* line 98, style.scss */
+.btn {
+  background-color: #11a7ab;
+  float: left;
+  cursor: pointer;
+  font-weight: normal;
+}
+
+/* line 105, style.scss */
+.back {
+  display: block;
+  position: absolute;
+  top: -60px;
+  left: 0;
+  color: #fff;
+  z-index: 10;
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  font-size: 35px;
+  margin-left: 6px;
+  cursor: pointer;
+}
+
+/* line 117, style.scss */
+.loader {
+  background: url("../img/ajax-loader.GIF") center center no-repeat rgba(57, 66, 100, 0.6);
+  z-index: 500;
+}
+
+/* line 124, style.scss */
+.row-title {
+  height: 60px;
+  line-height: 60px;
+  text-transform: uppercase;
+  background-color: #cb314b;
+  -webkit-border-radius: 4px 4px 0 0;
+  -moz-border-radius: 4px 4px 0 0;
+  -ms-border-radius: 4px 4px 0 0;
+  -o-border-radius: 4px 4px 0 0;
+  border-radius: 4px 4px 0 0;
+  -webkit-background-clip: padding;
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+  color: #fff;
+  font-size: 18px;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* line 136, style.scss */
+.row {
+  height: 60px;
+  line-height: 60px;
+  overflow: hidden;
+  background-color: #4f597b;
+  border-bottom: 1px solid #1f253d;
+  color: #fff;
+}
+/* line 144, style.scss */
+.row .temperature {
+  text-align: right;
+  padding-right: 20px;
+  font-size: 22px;
+  float: right;
+  margin-left: 40px;
+}
+/* line 153, style.scss */
+.row .date {
+  float: right;
+  color: #1f253d;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+/* line 159, style.scss */
+.row .date strong {
+  color: #fff;
+  margin-right: 5px;
+}
+/* line 166, style.scss */
+.row span {
+  float: left;
+  padding-left: 20px;
+  font-size: 35px;
+  height: 60px;
+  line-height: 60px;
+  margin-right: 30px;
+}
+/* line 174, style.scss */
+.row.row_active {
+  height: 120px;
+  background-color: #e54b65;
+}
+/* line 178, style.scss */
+.row.row_active .date {
+  color: #fff;
+  float: left;
+  line-height: 120px;
+}
+/* line 185, style.scss */
+.row.row_active .temperature {
+  font-size: 50px;
+  float: left;
+  line-height: 120px;
+  margin-left: 15px;
+}
+/* line 194, style.scss */
+.row.row_active span {
+  float: right;
+  font-size: 95px;
+  height: 120px;
+  line-height: 120px;
+}
+.panel{
+  padding: 25px ;
+}
+/*.panel-padding .map{
+  width: 100%;
+  height: 100%;
+}*/
+/*
+|-----------------------------------------------------
+| APP
+|-----------------------------------------------------
+|
+*/
+/* line 212, style.scss */
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  line-height: 60px;
+  color: #fff;
+  text-transform: uppercase;
+  text-align: center;
+  background-color: #1073b4;
+}
+
+/* line 222, style.scss */
+.view {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  bottom: 60px;
+  left: 0;
+}
+
+/* line 227, style.scss */
+.nav {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  line-height: 60px;
+  color: #fff;
+  text-align: center;
+  background-color: #1073b4;
+  overflow: hidden;
+  *zoom: 1;
+}
+/* line 236, style.scss */
+.nav a {
+  display: block;
+  width: 33%;
+  float: left;
+  color: #fff;
+  height: 60px;
+  line-height: 60px;
+  text-decoration: none;
+  font-size: 25px;
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+}
+/* line 246, style.scss */
+.nav a:first-child, .nav a:nth-child(2) {
+  border-right: 1px solid #f2f2f4;
+}
+/* line 250, style.scss */
+.nav .active {
+  border-top: 4px solid #3fa4e6;
+}
+/* line 251, style.scss */
+.nav span {
+  margin-top: 15px;
+}
+
+/* line 256, style.scss */
+.panel, .loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  -webkit-transition-duration: 0.5s;
+  -moz-transition-duration: 0.5s;
+  -o-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+}
+
+/* line 265, style.scss */
+/*.panel-padding {
+  padding: 25px;
+}
+*/
+/* line 269, style.scss */
+.left {
+  -webkit-transform: translate3D(-100%, 0, 0);
+  -moz-transform: translate3D(-100%, 0, 0);
+  -ms-transform: translate3D(-100%, 0, 0);
+  -o-transform: translate3D(-100%, 0, 0);
+  transform: translate3D(-100%, 0, 0);
+}
+
+/* line 270, style.scss */
+.center {
+  -webkit-transform: translate3D(0%, 0, 0);
+  -moz-transform: translate3D(0%, 0, 0);
+  -ms-transform: translate3D(0%, 0, 0);
+  -o-transform: translate3D(0%, 0, 0);
+  transform: translate3D(0%, 0, 0);
+}
+
+/* line 271, style.scss */
+.right {
+  -webkit-transform: translate3D(100%, 0, 0);
+  -moz-transform: translate3D(100%, 0, 0);
+  -ms-transform: translate3D(100%, 0, 0);
+  -o-transform: translate3D(100%, 0, 0);
+  transform: translate3D(100%, 0, 0);
+}
+
+/*
+|-----------------------------------------------------
+| Icomoon
+|-----------------------------------------------------
+|
+*/
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?p8ozwq');
+  src:  url('fonts/icomoon.eot?p8ozwq#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?p8ozwq') format('truetype'),
+    url('fonts/icomoon.woff?p8ozwq') format('woff'),
+    url('fonts/icomoon.svg?p8ozwq#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* line 291, style.scss */
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* line 305, style.scss */
+.icon-home:before {
+  content: "\e901";
+}
+.icon-earth:before {
+  content: "\e9cb";
+}
+.icon-history:before {
+  content: "\e94d";
+}
+
+.icon-circle-left:before {
+  content: "\ea44";
+}
+
+/* css of the automated search */
+
+
+/* scaffolding */
+/* ----------- */
+
+.tt-dropdown-menu,
+.gist {
+  text-align: left;
+  z-index: 1000;
+}
+
+.ng-invalid {
+  border-color: red !important; /* just for visual */
+}
+
+
+#svg8{
+  width: 100%;
+  height: 100%;
+}
+
+/* site theme */
+/* ---------- */
+
+.typeahead,
+.tt-query,
+.tt-hint {
+
+ width: 100%;
+height: 48px;
+
+padding: 8px 12px;
+font-size: 24px;
+line-height: 30px;
+border: 2px solid #ccc;
+-webkit-border-radius: 8px;
+   -moz-border-radius: 8px;
+        border-radius: 8px;
+outline: none;
+}
+
+
+.tt-query {
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.tt-hint {
+  color: #999
+}
+
+.tt-menu {
+  width: 100%;
+  margin: 12px 0;
+  padding: 8px 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+  -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+  box-shadow: 0 5px 10px rgba(0,0,0,.2);
+}
+
+.tt-suggestion {
+  padding: 3px 20px;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.tt-suggestion:hover {
+  cursor: pointer;
+  color: #fff;
+  background-color: #0097cf;
+}
+
+.tt-suggestion.tt-cursor {
+  color: #fff;
+  background-color: #0097cf;
+
+}
+
+.tt-suggestion p {
+  margin: 0;
+}
+.twitter-typeahead{
+  width: 100%;
+}
+
+
+/* end of the automated search */ 
+
+ /* start marker desgin */
+
+.pin {
+  display: none;
+  z-index: 13;
+  width: 30px;
+  height: 30px;
+  border-radius: 50% 50% 50% 0;
+  background: #00cae9;
+  position: absolute;
+  transform: rotate(-45deg);
+  left: 50%;
+  top: 50%;
+  margin: -20px 0 0 -20px;
+}
+.pin:after {
+  content: "";
+  width: 14px;
+  height: 14px;
+  margin: 8px 0 0 8px;
+  background: #e6e6e6;
+  position: absolute;
+  border-radius: 50%;
+}
+
+.bounce {
+  display: none;
+  animation-name: bounce;
+  animation-fill-mode: both;
+  animation-duration: 1s;
+}
+
+.pulse,.position {
+  display: none;
+  background: #d6d4d4;
+  border-radius: 50%;
+  height: 14px;
+  width: 14px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: 11px 0px 0px -12px;
+  transform: rotateX(55deg);
+  z-index: 10;
+}
+.pulse:after {
+  content: "";
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  position: absolute;
+  margin: -13px 0 0 -13px;
+  animation: pulsate 1s ease-out;
+  animation-iteration-count: infinite;
+  opacity: 0;
+  box-shadow: 0 0 1px 2px #00cae9;
+  animation-delay: 1.1s;
+}
+
+@keyframes pulsate {
+  0% {
+    transform: scale(0.1, 0.1);
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1.2, 1.2);
+    opacity: 0;
+  }
+}
+
+@keyframes bounce {
+  0% {
+    opacity: 0;
+    transform: translateY(-2000px) rotate(-45deg);
+  }
+
+  60% {
+    opacity: 1;
+    transform: translateY(30px) rotate(-45deg);
+  }
+
+  80% {
+    transform: translateY(-10px) rotate(-45deg);
+  }
+
+  100% {
+    transform: translateY(0) rotate(-45deg);}
+    
+
+/* end marker desgin */
+
