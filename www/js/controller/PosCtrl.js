@@ -232,15 +232,29 @@ function startRangingBeacons(){
 							var final_rssi_1222 = final_rssi(rssi_1222, mean_1222, standat_1222);
 							var final_rssi_1223 = final_rssi(rssi_1223, mean_1223, standat_1223);
 
-              t_beacon.push({"uuid":"b9407f30-f5f8-466e-aff9-25556b571218", "rssi": final_rssi_1218});
-							t_beacon.push({"uuid":"b9407f30-f5f8-466e-aff9-25556b571219", "rssi": final_rssi_1219});
-							t_beacon.push({"uuid":"b9407f30-f5f8-466e-aff9-25556b571221", "rssi": final_rssi_1221});
-							t_beacon.push({"uuid":"b9407f30-f5f8-466e-aff9-25556b571222", "rssi": final_rssi_1222});
-							t_beacon.push({"uuid":"b9407f30-f5f8-466e-aff9-25556b571223", "rssi": final_rssi_1223});
+              var dist_1218 = distance_rssi(final_rssi_1218);
+              var dist_1219 = distance_rssi(final_rssi_1219);
+              var dist_1221 = distance_rssi(final_rssi_1221);
+              var dist_1222 = distance_rssi(final_rssi_1222);
+              var dist_1223 = distance_rssi(final_rssi_1223);
+
+
+              t_beacon.push({"uuid":"b9407f30-f5f8-466e-aff9-25556b571218", "rssi": final_rssi_1218,"distance":dist_1218});
+							t_beacon.push({"uuid":"b9407f30-f5f8-466e-aff9-25556b571219", "rssi": final_rssi_1219,"distance":dist_1219});
+							t_beacon.push({"uuid":"b9407f30-f5f8-466e-aff9-25556b571221", "rssi": final_rssi_1221,"distance":dist_1221});
+							t_beacon.push({"uuid":"b9407f30-f5f8-466e-aff9-25556b571222", "rssi": final_rssi_1222,"distance":dist_1222});
+							t_beacon.push({"uuid":"b9407f30-f5f8-466e-aff9-25556b571223", "rssi": final_rssi_1223,"distance":dist_1223});
                      //t_beacon.push(elem);
+
+              t_beacon.sort(function(beacon1, beacon2) {
+                      return beacon1.distance < beacon2.distance; });
+              
               
 
             //alert("the length of t_beacon is :"+t_beacon.length);
+            
+            // algorthme of heatMap
+            /*
             var errorTab;
             var min=Math.pow(10,20);
             var err=0;
@@ -276,6 +290,8 @@ function startRangingBeacons(){
             }
             console.log("min ="+min+" zone="+Zonefinale);
             alert('zone: '+Zonefinale+', direction : '+der);
+            // end heat map lagorithm 
+            */
            
              //d3.select(".zones").style({"fill":"#dddd9d"});
              //d3.select("#"+Zonefinale).style({"fill":"#e74c3c"});
@@ -323,6 +339,20 @@ function startRangingBeacons(){
      	}
 
      	return rssi_array.reduce(sum_array)/rssi_array.length;
+     }
+
+     // calculate the distance from the the rssi
+
+     function distance_rssi(rssi_p){
+      var cal= -66;
+      var dist;
+      if(cal<rssi_p){
+          dist = Math.pow(10,rssi_p/cal)
+      }
+        else{
+          dist = 0.9*Math.pow(7.71,rssi_p/cal)+0.11
+        }
+      return dist
      }
 
       //Begin Of accelerationDevice get acceleration Device
