@@ -239,16 +239,18 @@ function startRangingBeacons(){
               var dist_1223 = distance_rssi(final_rssi_1223);
 
 
-              t_beacon.push({"uuid":"b9407f30-f5f8-466e-aff9-25556b571218", "rssi": final_rssi_1218,"distance":dist_1218});
-							t_beacon.push({"uuid":"b9407f30-f5f8-466e-aff9-25556b571219", "rssi": final_rssi_1219,"distance":dist_1219});
-							t_beacon.push({"uuid":"b9407f30-f5f8-466e-aff9-25556b571221", "rssi": final_rssi_1221,"distance":dist_1221});
-							t_beacon.push({"uuid":"b9407f30-f5f8-466e-aff9-25556b571222", "rssi": final_rssi_1222,"distance":dist_1222});
-							t_beacon.push({"uuid":"b9407f30-f5f8-466e-aff9-25556b571223", "rssi": final_rssi_1223,"distance":dist_1223});
+              t_beacon.push({"uuid":"b9407f30-f5f8-466e-aff9-25556b571218", "rssi": final_rssi_1218,"distance":dist_1218,"x":BeaconsTab.x,"y":BeaconsTab.y});
+							t_beacon.push({"uuid":"b9407f30-f5f8-466e-aff9-25556b571219", "rssi": final_rssi_1219,"distance":dist_1219,"x":BeaconsTab.x,"y":BeaconsTab.y});
+							t_beacon.push({"uuid":"b9407f30-f5f8-466e-aff9-25556b571221", "rssi": final_rssi_1221,"distance":dist_1221,"x":BeaconsTab.x,"y":BeaconsTab.y});
+							t_beacon.push({"uuid":"b9407f30-f5f8-466e-aff9-25556b571222", "rssi": final_rssi_1222,"distance":dist_1222,"x":BeaconsTab.x,"y":BeaconsTab.y});
+							t_beacon.push({"uuid":"b9407f30-f5f8-466e-aff9-25556b571223", "rssi": final_rssi_1223,"distance":dist_1223,"x":BeaconsTab.x,"y":BeaconsTab.y});
                      //t_beacon.push(elem);
 
               t_beacon.sort(function(beacon1, beacon2) {
                       return beacon1.distance < beacon2.distance; });
-              
+
+              calculate_Tri(t_beacon);
+
               
 
             //alert("the length of t_beacon is :"+t_beacon.length);
@@ -327,12 +329,12 @@ function startRangingBeacons(){
      	return Math.sqrt((1/sum)*temp);
      }
 
-     // calculate the sum of some data
+     // calculate the sum of some given data
      function sum_array(total, sum){
      			return total + sum;
      }
 
-     // calculate the average of some data
+     // calculate the average of some given data
      function final_rssi(rssi_array, mean, standart){
      	for(var i= 0;i<rssi_array.length;i++){
      		if(rssi_array[i]<mean-2*standart) rssi_array.splice(i,1);
