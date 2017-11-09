@@ -107,7 +107,7 @@ function startRangingBeacons(){
           var rssi_1219 =[];
           var rssi_1221 =[];
           var rssi_1222 =[];
-          var rssi_1223 =[];
+          //var rssi_1223 =[];
 
           var heatMap = [];
           var der='';
@@ -193,7 +193,7 @@ function startRangingBeacons(){
 											if( lastUUID == '1219' ) rssi_1219.push(beacon.rssi)
 											if( lastUUID == '1221' ) rssi_1221.push(beacon.rssi)
 											if( lastUUID == '1222' ) rssi_1222.push(beacon.rssi)
-											if( lastUUID == '1223' ) rssi_1223.push(beacon.rssi)
+											//if( lastUUID == '1223' ) rssi_1223.push(beacon.rssi)
                       //t_beacon.push({ "uuid" :beacon.proximityUUID,"rssi" : beacon.rssi});
 
 
@@ -212,35 +212,76 @@ function startRangingBeacons(){
 							var sum_1219 = rssi_1219.reduce(sum_array);
 							var sum_1221 = rssi_1221.reduce(sum_array);
 							var sum_1222 = rssi_1222.reduce(sum_array);
-							var sum_1223 = rssi_1223.reduce(sum_array);
+							//var sum_1223 = rssi_1223.reduce(sum_array);
 
 							var mean_1218 = sum_1218 / rssi_1218.length;
 							var mean_1219 = sum_1219 / rssi_1219.length;
 							var mean_1221 = sum_1221 / rssi_1221.length;
 							var mean_1222 = sum_1222 / rssi_1222.length;
-							var mean_1223 = sum_1223 / rssi_1223.length;
+							//var mean_1223 = sum_1223 / rssi_1223.length;
 
 							var standat_1218 = standart_array(rssi_1218, mean_1218, sum_1218);
 							var standat_1219 = standart_array(rssi_1219, mean_1219, sum_1219);
 							var standat_1221 = standart_array(rssi_1221, mean_1221, sum_1221);
 							var standat_1222 = standart_array(rssi_1222, mean_1222, sum_1222);
-							var standat_1223 = standart_array(rssi_1223, mean_1223, sum_1223);
+							//var standat_1223 = standart_array(rssi_1223, mean_1223, sum_1223);
 
 							var final_rssi_1218 = final_rssi(rssi_1218, mean_1218, standat_1218);
 							var final_rssi_1219 = final_rssi(rssi_1219, mean_1219, standat_1219);
 							var final_rssi_1221 = final_rssi(rssi_1221, mean_1221, standat_1221);
 							var final_rssi_1222 = final_rssi(rssi_1222, mean_1222, standat_1222);
-							var final_rssi_1223 = final_rssi(rssi_1223, mean_1223, standat_1223);
+							//var final_rssi_1223 = final_rssi(rssi_1223, mean_1223, standat_1223);
 
-              t_beacon.push({"uuid":"b9407f30-f5f8-466e-aff9-25556b571218", "rssi": final_rssi_1218});
-							t_beacon.push({"uuid":"b9407f30-f5f8-466e-aff9-25556b571219", "rssi": final_rssi_1219});
-							t_beacon.push({"uuid":"b9407f30-f5f8-466e-aff9-25556b571221", "rssi": final_rssi_1221});
-							t_beacon.push({"uuid":"b9407f30-f5f8-466e-aff9-25556b571222", "rssi": final_rssi_1222});
-							t_beacon.push({"uuid":"b9407f30-f5f8-466e-aff9-25556b571223", "rssi": final_rssi_1223});
+              var dist_1218 = distance_rssi(final_rssi_1218);
+              var dist_1219 = distance_rssi(final_rssi_1219);
+              var dist_1221 = distance_rssi(final_rssi_1221);
+              var dist_1222 = distance_rssi(final_rssi_1222);
+              
+              /*console.log("distance of 1218 is : "+dist_1218+"\n");
+              console.log("distance of 1219 is : "+dist_1219+"\n");
+              console.log("distance of 1221 is : "+dist_1221+"\n");
+              console.log("distance of 1222 is : "+dist_1222+"\n\n");*/
+
+              // console.log("1218 x :"+BeaconsTab[0].x+" 1218 y: "+BeaconsTab[0].y+"\n");
+
+              //var dist_1223 = distance_rssi(final_rssi_1223);
+
+
+              t_beacon.push({"uuid":"b9407f30-f5f8-466e-aff9-25556b571218", "rssi": final_rssi_1218,"distance":dist_1218,"x":BeaconsTab[0].x,"y":BeaconsTab[0].y});
+							t_beacon.push({"uuid":"b9407f30-f5f8-466e-aff9-25556b571219", "rssi": final_rssi_1219,"distance":dist_1219,"x":BeaconsTab[1].x,"y":BeaconsTab[1].y});
+							t_beacon.push({"uuid":"b9407f30-f5f8-466e-aff9-25556b571221", "rssi": final_rssi_1221,"distance":dist_1221,"x":BeaconsTab[2].x,"y":BeaconsTab[2].y});
+							t_beacon.push({"uuid":"b9407f30-f5f8-466e-aff9-25556b571222", "rssi": final_rssi_1222,"distance":dist_1222,"x":BeaconsTab[3].x,"y":BeaconsTab[3].y});
+							//t_beacon.push({"uuid":"b9407f30-f5f8-466e-aff9-25556b571223", "rssi": final_rssi_1223,"distance":dist_1223,"x":BeaconsTab.x,"y":BeaconsTab.y});
                      //t_beacon.push(elem);
+
+              
+
+              t_beacon.sort(function(beacon1, beacon2) {
+                      return beacon1.distance > beacon2.distance; });
+
+              /*for(i=0;i<t_beacon.length;i++){
+                console.log("uuid :"+t_beacon[i].uuid+", distance: "+t_beacon[i].distance+" x: "+t_beacon[i].x+" y: "+t_beacon[i].y+"\n");
+              }*/
+
+              var pos_device = calculate_Tri(t_beacon);
+              
+              console.log("x :"+pos_device.x+" y: "+pos_device.y);
+              // alert("after pos_device");
+
+              // start show the position on the map 
+
+              d3.select("#Device_position").transition().duration(800)
+                    .attr("visibility","visible")
+                    .attr("cx",pos_device.x)
+                    .attr("cy",pos_device.y);
+
+
               
 
             //alert("the length of t_beacon is :"+t_beacon.length);
+            
+            // algorthme of heatMap
+            /*
             var errorTab;
             var min=Math.pow(10,20);
             var err=0;
@@ -276,6 +317,8 @@ function startRangingBeacons(){
             }
             console.log("min ="+min+" zone="+Zonefinale);
             alert('zone: '+Zonefinale+', direction : '+der);
+            // end heat map lagorithm 
+            */
            
              //d3.select(".zones").style({"fill":"#dddd9d"});
              //d3.select("#"+Zonefinale).style({"fill":"#e74c3c"});
@@ -311,18 +354,32 @@ function startRangingBeacons(){
      	return Math.sqrt((1/sum)*temp);
      }
 
-     // calculate the sum of some data
+     // calculate the sum of some given data
      function sum_array(total, sum){
      			return total + sum;
      }
 
-     // calculate the average of some data
+     // calculate the average of some given data
      function final_rssi(rssi_array, mean, standart){
      	for(var i= 0;i<rssi_array.length;i++){
      		if(rssi_array[i]<mean-2*standart) rssi_array.splice(i,1);
      	}
 
      	return rssi_array.reduce(sum_array)/rssi_array.length;
+     }
+
+     // calculate the distance from the the rssi
+
+     function distance_rssi(rssi_p){
+      var cal= -66;
+      var dist;
+      if(cal<rssi_p){
+          dist = Math.pow(10,rssi_p/cal)
+      }
+        else{
+          dist = 0.9*Math.pow(7.71,rssi_p/cal)+0.11
+        }
+      return dist
      }
 
       //Begin Of accelerationDevice get acceleration Device
@@ -406,15 +463,15 @@ function startRangingBeacons(){
 
                  var S = (Math.pow(xc, 2.) - Math.pow(xb, 2.) + Math.pow(yc, 2.) - Math.pow(yb, 2.) + Math.pow(rb, 2.) - Math.pow(rc, 2.)) / 2.0;
                  var T = (Math.pow(xa, 2.) - Math.pow(xb, 2.) + Math.pow(ya, 2.) - Math.pow(yb, 2.) + Math.pow(rb, 2.) - Math.pow(ra, 2.)) / 2.0;
-                 var y = ((T * (xb - xc)) - (S * (xb - xa))) / (((ya - yb) * (xb - xc)) - ((yc - yb) * (xb - xa)));
-                 var x = ((y * (ya - yb)) - T) / (xb - xa);
+                     y = ((T * (xb - xc)) - (S * (xb - xa))) / (((ya - yb) * (xb - xc)) - ((yc - yb) * (xb - xa)));
+                     x = ((y * (ya - yb)) - T) / (xb - xa);
 
                  /*k = (sqr(beacons[0].x) + sqr(beacons[0].y) - sqr(beacons[1].x) - sqr(beacons[1].y) - sqr(beacons[0].dis) + sqr(beacons[1].dis)) / (2 * (beacons[0].y - beacons[1].y)) - (sqr(beacons[0].x) + sqr(beacons[0].y) - sqr(beacons[2].x) - sqr(beacons[2].y) - sqr(beacons[0].dis) + sqr(beacons[2].dis)) / (2 * (beacons[0].y - beacons[2].y));
                  j = (beacons[2].x - beacons[0].x) / (beacons[0].y - beacons[2].y) - (beacons[1].x - beacons[0].x) / (beacons[0].y - beacons[1].y);
                  x = k / j;
                  y = ((beacons[1].x - beacons[0].x) / (beacons[0].y - beacons[1].y)) * x + (sqr(beacons[0].x) + sqr(beacons[0].y) - sqr(beacons[1].x) - sqr(beacons[1].y) - sqr(beacons[0].dis) + sqr(beacons[1].dis)) / (2 * (beacons[0].y - beacons[1].y));*/
 
-                 return { x: x,  y: y };
+                 return { "x": x,  "y": y };
       }
       //Ende of calculate_Tri
 
@@ -562,7 +619,7 @@ var y_val = $("#"+id_room).attr('cy');
 }// end finWay
 
 // the position of the device
-d3.select("#layer7").append("circle")
+d3.select("#svg8").append("circle")
           .attr("id","Device_position")
           .attr("r", 1)
           .attr("visibility", "hidden")

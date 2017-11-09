@@ -16,7 +16,7 @@
    version="1.1"
    id="svg8"
    inkscape:version="0.92.1 r15371"
-   sodipodi:docname="abdullah_floor_Eckenberg.svg">
+   sodipodi:docname="abdullah_floor_horizental-Eckenberg.svg">
   <defs
      id="defs2">
     <linearGradient
@@ -35,17 +35,17 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.56601563"
-     inkscape:cx="-547.86891"
-     inkscape:cy="563.99103"
+     inkscape:zoom="1.600934"
+     inkscape:cx="255.59689"
+     inkscape:cy="1056.4422"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1920"
-     inkscape:window-height="1001"
-     inkscape:window-x="-9"
-     inkscape:window-y="41"
-     inkscape:window-maximized="1" />
+     inkscape:window-width="732"
+     inkscape:window-height="696"
+     inkscape:window-x="625"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0" />
   <metadata
      id="metadata5">
     <rdf:RDF>
@@ -54,7 +54,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -357,5 +357,60 @@
         </g>
       </g>
     </g>
+    <ellipse
+       inkscape:label="#path4540"
+       ry="0.87646657"
+       rx="1.2200772"
+       cy="27.880337"
+       cx="47.99086"
+       id="beacon22"
+       style="opacity:1;fill:#ff0000;fill-opacity:1;stroke:#ffecff;stroke-width:0;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
+       transform="matrix(-0.33453011,0.94238506,0.80651472,0.59121401,0,0)"
+       inkscape:transform-center-x="-0.11302141"
+       inkscape:transform-center-y="-0.3518443" />
+    <ellipse
+       inkscape:label="#path4540"
+       ry="0.87646657"
+       rx="1.2200772"
+       cy="-0.31805083"
+       cx="-59.21069"
+       id="beacon23"
+       style="opacity:1;fill:#ff0000;fill-opacity:1;stroke:#ffecff;stroke-width:0;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
+       transform="matrix(-0.99602566,-0.08906669,-0.37151619,0.92842647,0,0)"
+       inkscape:transform-center-x="-0.36890854"
+       inkscape:transform-center-y="0.021750529" />
+    <ellipse
+       inkscape:label="#path4540"
+       ry="0.87646657"
+       rx="1.2200772"
+       cy="129.40515"
+       cx="54.841576"
+       id="beacon21"
+       style="opacity:1;fill:#ff0000;fill-opacity:1;stroke:#ffecff;stroke-width:0;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
+       transform="matrix(-0.36632167,0.93048828,0.78598444,0.61824628,0,0)"
+       inkscape:transform-center-x="-0.12489258"
+       inkscape:transform-center-y="-0.34781141" />
+    <ellipse
+       inkscape:label="#path4540"
+       ry="0.87646657"
+       rx="1.2200772"
+       cy="279.46304"
+       cx="-211.7072"
+       id="beacon18"
+       style="opacity:1;fill:#ff0000;fill-opacity:1;stroke:#ffecff;stroke-width:0;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
+       transform="matrix(-0.96814563,-0.25038779,-0.51802252,0.85536698,0,0)"
+       inkscape:transform-center-x="-0.36043273"
+       inkscape:transform-center-y="0.081641745" />
+    <ellipse
+       inkscape:label="#path4540"
+       ry="0.87646657"
+       rx="1.2200772"
+       cy="68.092812"
+       cx="162.82805"
+       id="beacon19"
+       style="opacity:1;fill:#ff0000;fill-opacity:1;stroke:#ffecff;stroke-width:0;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
+       transform="matrix(-0.21475244,0.97666852,0.87377017,0.48633908,0,0)"
+       inkscape:transform-center-x="-0.068395213"
+       inkscape:transform-center-y="-0.36315922" />
   </g>
 </svg>
