@@ -1,11 +1,53 @@
+
+// data of the each beacon 
 BeaconsTab= [
 
     { "uuid": "B9407F30-F5F8-466E-AFF9-25556B571218", "x": 59.396, "y":4.092   },
     { "uuid": "B9407F30-F5F8-466E-AFF9-25556B571219", "x": 24.186, "y":103.543 },
     { "uuid": "B9407F30-F5F8-466E-AFF9-25556B571221", "x": 81.266, "y":164.662 },
     { "uuid": "B9407F30-F5F8-466E-AFF9-25556B571222", "x": 6.081,  "y":233.983 },
-    { "uuid": "B9407F30-F5F8-466E-AFF9-25556B571223", "x": 58.301, "y":291.155 }];
+    { "uuid": "B9407F30-F5F8-466E-AFF9-25556B571223", "x": 58.301, "y":291.155 }
+    ];// end the array of data beacon;
 
+
+//the names of the zimmer to search 
+zimmer_name = [
+      { room: 'zimmer 322' },
+      { room: 'zimmer 321' },
+      { room: 'zimmer 320' },
+      { room: 'zimmer 319' },
+      { room: 'zimmer 318' },
+      { room: 'zimmer 317' }
+    ];
+
+//the zimmer with their ids
+zimmerNameId ={
+"zimmer322":"circle22",
+"zimmer321":"circle21",
+"zimmer320":"circle20",
+"zimmer319":"circle19",
+"zimmer318":"circle18",
+"zimmer317":"circle17"
+};
+ 
+// the cordinates of the maps, the x and y of each circle on the map 
+mapCoordnidates ={
+    "circle17":     {"x": 44.175, "y": 27.480 },
+    "circle18":     {"x": 44.175, "y": 70.673},
+    "circle19":     {"x": 44.175, "y": 147.072},
+    "circle20":     {"x": 44.175, "y": 189.934},
+    "circle21":     {"x": 44.175, "y": 253.302},
+    "circle22":     {"x": 44.175, "y": 282.714}
+        };// end mapCoordinates
+
+// the graph of the map, so the distance between each circl in the map
+map = {  circle22:{circle21:3},
+	     circle21:{circle22:3,circle20:3},
+	     circle20:{circle21:3,circle19:3},
+	     circle19:{circle20:3,circle18:3},
+	     circle18:{circle19:3,circle17:3},
+	     circle17:{circle18:3}
+            };// end of the graph
 //heatmap
 /*
 northHeatMap = [

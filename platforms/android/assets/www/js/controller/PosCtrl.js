@@ -1,8 +1,4 @@
 
-
-
-
-
 function PosCtrl($scope,$http){
  $(function(){
 $scope.panel = 0;
@@ -11,7 +7,7 @@ $scope.panel = 0;
 
  // to switch between the panels
  $scope.panel  = 1;
- //findWay();
+ findWay();
  startRangingBeacons();
  //orientationDevice();
 
@@ -23,36 +19,7 @@ $scope.panel = 0;
   var rooms = new Bloodhound({
     datumTokenizer: function(d) { return Bloodhound.tokenizers.whitespace(d.room); },
     queryTokenizer: Bloodhound.tokenizers.whitespace,
-    local: [
-      { room: 'Mueller' },
-      { room: 'Koch' },
-      { room: 'Pawlowski' },
-      { room: 'Bumiller' },
-      { room: 'Shaefer' },
-      { room: 'Bittner' },
-      { room: 'Handm'},
-      { room: 'lossifidiss' },
-      { room: 'Geisler' },
-      { room: 'Wechsler' },
-      { room: 'Jansen' },
-      { room: 'Lausberg' },
-      { room: 'Knot1' },
-      { room: 'Knot2' },
-      { room: 'Knot3' },
-      { room: 'Knot4' },
-      { room: 'Knot5' },
-      { room: 'Knot6' },
-      { room: 'Knot7' },
-      { room: 'Knot8' },
-      { room: 'Knot9' },
-      { room: 'Knot10' },
-      { room: 'Knot11' },
-      { room: 'Knot12' },
-      { room: 'Knot13' },
-      { room: 'Knot14' },
-      { room: 'Knot15' },
-      { room: 'labomueller'},
-    ]
+    local: zimmer_name
   });
 
   // initialize the bloodhound suggestion engine
@@ -107,7 +74,7 @@ function startRangingBeacons(){
           var rssi_1219 =[];
           var rssi_1221 =[];
           var rssi_1222 =[];
-          //var rssi_1223 =[];
+          var rssi_1223 =[];
 
           var heatMap = [];
           var der='';
@@ -193,7 +160,7 @@ function startRangingBeacons(){
 											if( lastUUID == '1219' ) rssi_1219.push(beacon.rssi)
 											if( lastUUID == '1221' ) rssi_1221.push(beacon.rssi)
 											if( lastUUID == '1222' ) rssi_1222.push(beacon.rssi)
-											//if( lastUUID == '1223' ) rssi_1223.push(beacon.rssi)
+											if( lastUUID == '1223' ) rssi_1223.push(beacon.rssi)
                       //t_beacon.push({ "uuid" :beacon.proximityUUID,"rssi" : beacon.rssi});
 
 
@@ -207,35 +174,52 @@ function startRangingBeacons(){
 
 
               console.log("heatMap :"+heatMap);
-
-              var sum_1218 = rssi_1218.reduce(sum_array);
-							var sum_1219 = rssi_1219.reduce(sum_array);
-							var sum_1221 = rssi_1221.reduce(sum_array);
-							var sum_1222 = rssi_1222.reduce(sum_array);
-							//var sum_1223 = rssi_1223.reduce(sum_array);
-
-							var mean_1218 = sum_1218 / rssi_1218.length;
-							var mean_1219 = sum_1219 / rssi_1219.length;
-							var mean_1221 = sum_1221 / rssi_1221.length;
-							var mean_1222 = sum_1222 / rssi_1222.length;
-							//var mean_1223 = sum_1223 / rssi_1223.length;
-
-							var standat_1218 = standart_array(rssi_1218, mean_1218, sum_1218);
-							var standat_1219 = standart_array(rssi_1219, mean_1219, sum_1219);
-							var standat_1221 = standart_array(rssi_1221, mean_1221, sum_1221);
-							var standat_1222 = standart_array(rssi_1222, mean_1222, sum_1222);
-							//var standat_1223 = standart_array(rssi_1223, mean_1223, sum_1223);
-
-							var final_rssi_1218 = final_rssi(rssi_1218, mean_1218, standat_1218);
-							var final_rssi_1219 = final_rssi(rssi_1219, mean_1219, standat_1219);
-							var final_rssi_1221 = final_rssi(rssi_1221, mean_1221, standat_1221);
-							var final_rssi_1222 = final_rssi(rssi_1222, mean_1222, standat_1222);
-							//var final_rssi_1223 = final_rssi(rssi_1223, mean_1223, standat_1223);
-
-              var dist_1218 = distance_rssi(final_rssi_1218);
-              var dist_1219 = distance_rssi(final_rssi_1219);
-              var dist_1221 = distance_rssi(final_rssi_1221);
-              var dist_1222 = distance_rssi(final_rssi_1222);
+              if(rssi_1218.length>1){
+                var sum_1218 = rssi_1218.reduce(sum_array);
+                var mean_1218 = sum_1218 / rssi_1218.length;
+                var standat_1218 = standart_array(rssi_1218, mean_1218, sum_1218);
+                var final_rssi_1218 = final_rssi(rssi_1218, mean_1218, standat_1218);
+                var dist_1218 = distance_rssi(final_rssi_1218);
+                t_beacon.push({"uuid":"b9407f30-f5f8-466e-aff9-25556b571218", "rssi": final_rssi_1218,"distance":dist_1218,"x":BeaconsTab[0].x,"y":BeaconsTab[0].y});
+              }
+              
+              if(rssi_1219.length>1){
+                var sum_1219 = rssi_1219.reduce(sum_array);
+                var mean_1219 = sum_1219 / rssi_1219.length;
+                var standat_1219 = standart_array(rssi_1219, mean_1219, sum_1219);
+                var final_rssi_1219 = final_rssi(rssi_1219, mean_1219, standat_1219);
+                var dist_1219 = distance_rssi(final_rssi_1219);
+                t_beacon.push({"uuid":"b9407f30-f5f8-466e-aff9-25556b571219", "rssi": final_rssi_1219,"distance":dist_1219,"x":BeaconsTab[1].x,"y":BeaconsTab[1].y});
+              }
+							
+              if(rssi_1221.length>1){
+                var sum_1221 = rssi_1221.reduce(sum_array);
+                var mean_1221 = sum_1221 / rssi_1221.length;
+                var standat_1221 = standart_array(rssi_1221, mean_1221, sum_1221);
+                var final_rssi_1221 = final_rssi(rssi_1221, mean_1221, standat_1221);
+                var dist_1221 = distance_rssi(final_rssi_1221);
+                t_beacon.push({"uuid":"b9407f30-f5f8-466e-aff9-25556b571221", "rssi": final_rssi_1221,"distance":dist_1221,"x":BeaconsTab[2].x,"y":BeaconsTab[2].y});
+              }
+							
+              if(rssi_1222.length>1){
+                var sum_1222 = rssi_1222.reduce(sum_array);
+                var mean_1222 = sum_1222 / rssi_1222.length;
+                var standat_1222 = standart_array(rssi_1222, mean_1222, sum_1222);
+                var final_rssi_1222 = final_rssi(rssi_1222, mean_1222, standat_1222);
+                var dist_1222 = distance_rssi(final_rssi_1222);
+                t_beacon.push({"uuid":"b9407f30-f5f8-466e-aff9-25556b571222", "rssi": final_rssi_1222,"distance":dist_1222,"x":BeaconsTab[3].x,"y":BeaconsTab[3].y});
+              }
+							
+							if(rssi_1223.length>1){
+              var sum_1223 = rssi_1223.reduce(sum_array);
+							var mean_1223 = sum_1223 / rssi_1223.length;
+							var standat_1223 = standart_array(rssi_1223, mean_1223, sum_1223);
+							var final_rssi_1223 = final_rssi(rssi_1223, mean_1223, standat_1223);
+              var dist_1223 = distance_rssi(final_rssi_1223);
+              
+              t_beacon.push({"uuid":"b9407f30-f5f8-466e-aff9-25556b571223", "rssi": final_rssi_1223,"distance":dist_1223,"x":BeaconsTab.x,"y":BeaconsTab.y});
+             }
+              
               
               /*console.log("distance of 1218 is : "+dist_1218+"\n");
               console.log("distance of 1219 is : "+dist_1219+"\n");
@@ -243,19 +227,8 @@ function startRangingBeacons(){
               console.log("distance of 1222 is : "+dist_1222+"\n\n");*/
 
               // console.log("1218 x :"+BeaconsTab[0].x+" 1218 y: "+BeaconsTab[0].y+"\n");
-
-              //var dist_1223 = distance_rssi(final_rssi_1223);
-
-
-              t_beacon.push({"uuid":"b9407f30-f5f8-466e-aff9-25556b571218", "rssi": final_rssi_1218,"distance":dist_1218,"x":BeaconsTab[0].x,"y":BeaconsTab[0].y});
-							t_beacon.push({"uuid":"b9407f30-f5f8-466e-aff9-25556b571219", "rssi": final_rssi_1219,"distance":dist_1219,"x":BeaconsTab[1].x,"y":BeaconsTab[1].y});
-							t_beacon.push({"uuid":"b9407f30-f5f8-466e-aff9-25556b571221", "rssi": final_rssi_1221,"distance":dist_1221,"x":BeaconsTab[2].x,"y":BeaconsTab[2].y});
-							t_beacon.push({"uuid":"b9407f30-f5f8-466e-aff9-25556b571222", "rssi": final_rssi_1222,"distance":dist_1222,"x":BeaconsTab[3].x,"y":BeaconsTab[3].y});
-							//t_beacon.push({"uuid":"b9407f30-f5f8-466e-aff9-25556b571223", "rssi": final_rssi_1223,"distance":dist_1223,"x":BeaconsTab.x,"y":BeaconsTab.y});
-                     //t_beacon.push(elem);
-
+             //t_beacon.push(elem);
               
-
               t_beacon.sort(function(beacon1, beacon2) {
                       return beacon1.distance > beacon2.distance; });
 
@@ -480,114 +453,35 @@ function startRangingBeacons(){
 ==
 ==
 */
-d3.select("#layer7").append("path")
+d3.select("#svg8").append("path")
                     .attr("visibility","hidden")
                     .attr("id","theWay");
+function findWay(){
 
-    function findWay(){
+  d3.selectAll(".knoten").attr("visibility", "hidden");
+    
+  var id_room = $('#room').val().split(" ").join("").toLowerCase();
+  id_room = zimmerNameId[id_room];
+  
+  graph = new Graph(map);
+  var shortWay = [];
+  shortWay = graph.findShortestPath('circle22',id_room);
+  console.log("the short way to the destination : \n"+shortWay);
+   var len = shortWay.length;
+   // the points of each noud which will be drawed
+   var points =[];
 
-    d3.selectAll(".knoten").attr("visibility", "hidden");
-    var mapCoordnidates ={
-    "mueller":       {"x": 132.43132, "y":38.115368 },
-    "pawlowski":     {"x": 131.21436, "y": 41.803917},
-    "bumiller":      {"x": 130.01164, "y": 45.436447},
-    "shaefer":       {"x": 128.82826, "y": 49.058914},
-    "knot1":         {"x": 127.98038, "y": 51.64579},
-    "koch":          {"x": 127.56159, "y": 52.847759},
-    "bittner":       {"x": 126.87598, "y": 54.994427},
-    "lossifidiss":   {"x": 126.34015, "y": 56.58363},
-    "handm":         {"x": 125.62983, "y": 58.650169},
-    "wechsler":      {"x": 125.08993, "y": 60.41745},
-    "geisler":       {"x": 124.00881, "y": 63.713413},
-    "lausberg":      {"x": 118.63727, "y":64.231216},
-    "jansen":        {"x": 122.76172, "y":67.271194},
-    "knot2":         {"x": 116.11674, "y": 70.035522},
-    "knot3":         {"x": 109.84778, "y": 70.438797},
-    "knot4":         {"x": 102.09695, "y": 70.572433},
-    "knot5":         {"x": 95.147957, "y": 70.472206},
-    "knot6":         {"x": 86.896004, "y": 70.739479},
-    "knot7":         {"x": 75.069328, "y": 70.70607},
-    "knot8":         {"x": 73.234314, "y": 73.367828},
-    "knot9":         {"x": 75.169556, "y": 65.555763},
-    "knot10":        {"x": 75.236374, "y": 62.554344},
-    "knot11":        {"x": 75.136147, "y": 50.560627},
-    "knot12":        {"x": 75.035919, "y": 47.420212},
-    "knot13":        {"x": 75.102737, "y": 42.943447},
-    "knot14":        {"x": 75.102737, "y": 35.760578},
-    "knot15":        {"x": 75.051895, "y": 32.788326},
-    "labomueller":    {"x": 76.004776, "y": 22.764597}
-        };
-
-  var map = {mueller:{pawlowski:3},
-             pawlowski:{pawlowski:3,bumiller:13},
-             bumiller:{pawlowski:4,shaefer:1},
-             shaefer:{bumiller:3,knot1:1},
-             knot1:{shaefer:2,koch:1},
-             koch:{knot1:4,bittner:1},
-             bittner:{koch:3,lossifidiss:1},
-             lossifidiss:{koch:2,handm:1},
-             handm:{lossifidiss:4,wechsler:1},
-             wechsler:{handm:3,geisler:1},
-             geisler:{wechsler:2,jansen:1},
-             jansen:{geisler:2,lausberg:1},
-             jansen:{knot2:1},
-             lausberg:{jansen:1,knot2:1},
-             knot2:{lausberg:1,jansen:1},
-             knot2:{knot3:4},
-             knot3:{knot2:4,knot4:1},
-             knot4:{knot3:3,knot5:1},
-             knot5:{knot4:2,knot6:1},
-             knot6:{knot5:4,knot7:4},
-             knot6:{knot8:5,knot9:6},
-             knot7:{knot6:4,knot8:1},
-             knot7:{knot9:2},
-             knot8:{knot7:1},
-             knot9:{knot8:2,knot10:1},
-             knot10:{knot9:1,knot11:1},
-             knot11:{knot10:1,knot12:1},
-             knot12:{knot11:1,knot13:1},
-             knot13:{knot12:1,knot14:1},
-             knot14:{knot13:1,knot15:1},
-             knot15:{knot14:1,labomueller:1},
-             labomueller:{knot15:1},
-            };
-  // end of the graph
-
-
-  var id_room = $('#room').val();
-  var id_room = id_room.toLowerCase();
-
-
-
-    graph = new Graph(map);
-    var shortWay = [];
-    shortWay = graph.findShortestPath('mueller', id_room);
-    console.log(shortWay);
-     var len = shortWay.length;
-     // the points of each noud which will be drawed
-     var points =[];
-
-     for(i=0;i<len;i++){
-      var key = shortWay[i];
-       if(mapCoordnidates[key]){
-        object = {"x":mapCoordnidates[key].x, "y":mapCoordnidates[key].y};
-
-        points.push(object);
-      }
-
+   for(i=0;i<len;i++){
+    var key = shortWay[i];
+     if(mapCoordnidates[key]){
+      object = {"x":mapCoordnidates[key].x, "y":mapCoordnidates[key].y};
+      points.push(object);
     }
-
-    console.log(points);
-
+  }
+console.log("points of the line : \n"+points);
 
 // draw the line of the points  until the destination
-
-
-  d3.select("#theWay").attr("visibility","hidden");
-
-
-
-
+d3.select("#theWay").attr("visibility","hidden");
 
 var lineFunction = d3.svg.line()
                          .x(function(d) { return d.x; })
@@ -604,18 +498,8 @@ d3.select("#theWay").attr("d", lineFunction(points))
  d3.select("#"+id_room)
                   .style("fill","#3498db")
                   .style("z-index",10)
-                  .attr("r",1)
+                  .attr("r",2)
                   .attr("visibility","visible");
-
-/*var x_val = $("#"+id_room).attr('cx');
-var y_val = $("#"+id_room).attr('cy');
-
-    var img = d3.select("#layer7").append("svg:image")
-    .attr("src", "marker.svg")
-    .attr("width", 10)
-    .attr("height", 10)
-    .attr("x", x_val)
-    .attr("y",y_val);*/
 }// end finWay
 
 // the position of the device
@@ -636,7 +520,5 @@ function zoom() {
   svg.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
 }
 // end zoom
-
-
 
 }//Ende PostCtrl
