@@ -1,36 +1,3 @@
-
-<section ng-controller="PosCtrl">
-
-
-	 <a class="back" ng-hide="panel==0" ng-click="panel=0">
-	 	<span class="icon-arrow-left"></span>
-	 </a>
-
-	<section
-		class="panel panel-padding"
-		ng-class="{center:panel==0, left:panel>0}">
-
-		<p>Welcome bei indoor Navigation de</p>
-
-		<form ng-submit="search()" >
-				<input type="text"  name="room" id="room" class="typeahead " autocomplete="off"  placeholder="Ihre Ziel suchen" sf-typeahead options="exampleOptions" datasets="roomsDataset" ng-model="selectedRoom"/>
-				<br/>
-				<br/>
-				<input type="submit" class="submit" value="Suchen" />
-
-		</form>
-	</section>
-
-
-
-	<section
-		class="panel panel-padding right"
-		ng-class="{center:panel==1, right:panel<1}">
-		<!-- strat map-->
-
-
-
-
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
@@ -585,23 +552,3 @@
        inkscape:label="#path4800-6-3" />
   </g>
 </svg>
-
-
-
-
-
-
-
-		<div class="pin bounce"></div>
-		<div class="pulse"></div>
-		<!--div class="testtest">ana hna2</div-->
-		<!-- display the beacons here -->
-		<div id="ShowBeacons">
-		</div>
-		
-	</section>
-
-
-
-
-</section>

@@ -89,72 +89,84 @@ $scope.direction = function(){
     var zone = $scope.selectedRoompart;
 
     //alert("der : "+der);
-    var i=0;
 		var rssi_1218 =[];
-		var rssi_1219 =[];
-		var rssi_1221 =[];
-		var rssi_1222 =[];
-		var rssi_1223 =[];
+    var rssi_1219 =[];
+    var rssi_1221 =[];
+    var rssi_1222 =[];
+    var rssi_1211 =[];
+    var i = 0;
 
   	 estimote.beacons.requestAlwaysAuthorization();
         estimote.beacons.startRangingBeaconsInRegion(
           {},
           function(beaconInfo) {
-
-
-          	//$("#korra").empty();
-            elem = '';
-
-          	$.each(beaconInfo.beacons, function(key, beacon){
-                      $('#korra').empty();
-                      beaconInfo.beacons.sort(function(beacon1, beacon2) {
-                      return beacon1.rssi < beacon2.rssi; });
-                      //elem += createBeaconJson(beacon);
-											var string_UUID = beacon.proximityUUID;
-											var lengthUUID = string_UUID.length;
-											var lastUUID = string_UUID.substr(lengthUUID - 4);
-                      if( lastUUID == '1218' ) rssi_1218.push(beacon.rssi)
-											if( lastUUID == '1219' ) rssi_1219.push(beacon.rssi)
-											if( lastUUID == '1221' ) rssi_1221.push(beacon.rssi)
-											if( lastUUID == '1222' ) rssi_1222.push(beacon.rssi)
-											if( lastUUID == '1223' ) rssi_1223.push(beacon.rssi)
+            
+          	
+            var elem = '';
+             
+          	    $.each(beaconInfo.beacons, function(key, beacon){
+                $('#korra').empty();
+                beaconInfo.beacons.sort(function(beacon1, beacon2) {
+                return beacon1.rssi < beacon2.rssi; });
+                //elem += createBeaconJson(beacon);
+								var string_UUID = beacon.proximityUUID;
+								var lengthUUID = string_UUID.length;
+								var lastUUID = string_UUID.substr(lengthUUID - 4);
+                if( lastUUID == '1218' ) rssi_1218.push(beacon.rssi)
+								if( lastUUID == '1219' ) rssi_1219.push(beacon.rssi)
+								if( lastUUID == '1221' ) rssi_1221.push(beacon.rssi)
+								if( lastUUID == '1222' ) rssi_1222.push(beacon.rssi)
+								if( lastUUID == '1211' ) rssi_1211.push(beacon.rssi)
 
             });i++;
+                if(i > 9){
+                estimote.beacons.stopRangingBeaconsInRegion({});
 
-          	if (i>10) {
-							var sum_1218 = rssi_1218.reduce(sum_array);
-							var sum_1219 = rssi_1219.reduce(sum_array);
-							var sum_1221 = rssi_1221.reduce(sum_array);
-							var sum_1222 = rssi_1222.reduce(sum_array);
-							var sum_1223 = rssi_1223.reduce(sum_array);
+          	
+							if(rssi_1218.length>0){
+                var sum_1218 = rssi_1218.reduce(sum_array);
+                var mean_1218 = sum_1218 / rssi_1218.length;
+                var standat_1218 = standart_array(rssi_1218, mean_1218, sum_1218);
+                var final_rssi_1218 = final_rssi(rssi_1218, mean_1218, standat_1218);
+                elem += '{"uuid":"b9407f30-f5f8-466e-aff9-25556b571218", "rssi": '+final_rssi_1218+'},\n';
+              }
+              
+              if(rssi_1219.length>0){
+                var sum_1219 = rssi_1219.reduce(sum_array);
+                var mean_1219 = sum_1219 / rssi_1219.length;
+                var standat_1219 = standart_array(rssi_1219, mean_1219, sum_1219);
+                var final_rssi_1219 = final_rssi(rssi_1219, mean_1219, standat_1219);
+                elem += '{"uuid":"b9407f30-f5f8-466e-aff9-25556b571219", "rssi": '+final_rssi_1219+'},\n';
+              }
+              
+              if(rssi_1221.length>0){
+                var sum_1221 = rssi_1221.reduce(sum_array);
+                var mean_1221 = sum_1221 / rssi_1221.length;
+                var standat_1221 = standart_array(rssi_1221, mean_1221, sum_1221);
+                var final_rssi_1221 = final_rssi(rssi_1221, mean_1221, standat_1221);
+                elem += '{"uuid":"b9407f30-f5f8-466e-aff9-25556b571221", "rssi": '+final_rssi_1221+'},\n';
+              }
+              
+              if(rssi_1222.length>0){
+                var sum_1222 = rssi_1222.reduce(sum_array);
+                var mean_1222 = sum_1222 / rssi_1222.length;
+                var standat_1222 = standart_array(rssi_1222, mean_1222, sum_1222);
+                var final_rssi_1222 = final_rssi(rssi_1222, mean_1222, standat_1222);
+                elem += '{"uuid":"b9407f30-f5f8-466e-aff9-25556b571222", "rssi": '+final_rssi_1222+'},\n';
+              }
+              
+              if(rssi_1211.length>0){
+              var sum_1211 = rssi_1211.reduce(sum_array);
+              var mean_1211 = sum_1211 / rssi_1211.length;
+              var standat_1211 = standart_array(rssi_1211, mean_1211, sum_1211);
+              var final_rssi_1211 = final_rssi(rssi_1211, mean_1211, standat_1211);
+              
+              elem += '{"uuid":"b9407f30-f5f8-466e-aff9-25556b571211", "rssi": '+final_rssi_1211+'}\n';
+             }
 
-							var mean_1218 = sum_1218 / rssi_1218.length;
-							var mean_1219 = sum_1219 / rssi_1219.length;
-							var mean_1221 = sum_1221 / rssi_1221.length;
-							var mean_1222 = sum_1222 / rssi_1222.length;
-							var mean_1223 = sum_1223 / rssi_1223.length;
-
-							var standat_1218 = standart_array(rssi_1218, mean_1218, sum_1218);
-							var standat_1219 = standart_array(rssi_1219, mean_1219, sum_1219);
-							var standat_1221 = standart_array(rssi_1221, mean_1221, sum_1221);
-							var standat_1222 = standart_array(rssi_1222, mean_1222, sum_1222);
-							var standat_1223 = standart_array(rssi_1223, mean_1223, sum_1223);
-
-							var final_rssi_1218 = final_rssi(rssi_1218, mean_1218, standat_1218);
-							var final_rssi_1219 = final_rssi(rssi_1219, mean_1219, standat_1219);
-							var final_rssi_1221 = final_rssi(rssi_1221, mean_1221, standat_1221);
-							var final_rssi_1222 = final_rssi(rssi_1222, mean_1222, standat_1222);
-							var final_rssi_1223 = final_rssi(rssi_1223, mean_1223, standat_1223);
-
-							elem = '{"UUID":"b9407f30-f5f8-466e-aff9-25556b571218", "rssi":'+ final_rssi_1218+'},\n'+
-										 '{"UUID":"b9407f30-f5f8-466e-aff9-25556b571219", "rssi":'+ final_rssi_1219+'},\n'+
-										 '{"UUID":"b9407f30-f5f8-466e-aff9-25556b571221", "rssi":'+ final_rssi_1221+'},\n'+
-										 '{"UUID":"b9407f30-f5f8-466e-aff9-25556b571222", "rssi":'+ final_rssi_1222+'},\n'+
-										 '{"UUID":"b9407f30-f5f8-466e-aff9-25556b571223", "rssi":'+ final_rssi_1223+'},\n';
 
 
-
-      estimote.beacons.stopRangingBeaconsInRegion({});
+      
 
       window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function(dir) {
        console.log("got main dir",dir);
