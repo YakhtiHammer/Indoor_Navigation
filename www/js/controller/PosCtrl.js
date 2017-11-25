@@ -61,6 +61,7 @@ function startRangingBeacons(){
       //alert(heatMap["B"][1].UUID);
       //alert(heatMap.length);
     // Request authorisation.
+
           var t_beacon=  [];
           var rssi_1218 =[];
           var rssi_1219 =[];
@@ -68,7 +69,7 @@ function startRangingBeacons(){
           var rssi_1222 =[];
           var rssi_1211 =[];
           var e = 0;
-          var deviceOreintation;
+          //var deviceOreintation;
 
         //  do{
         //   deviceOreintation=orientationDevice(function(hd){ return hd;});
@@ -76,15 +77,23 @@ function startRangingBeacons(){
         // }while(deviceOreintation == undefined || deviceOreintation == 0)
          //orientationDevice(function(hd){ console.log(hd);});
           //console.log('device orientation 1: '+deviceOreintation);
-          orientationDevice(function(hd){ deviceOreintation=hd;
+          /*orientationDevice(function(hd){ deviceOreintation=hd;
             console.log('device orientation 2: '+deviceOreintation);
           });
           //console.log('device orientation 2: '+deviceOreintation);
           setTimeout(function(){},500);
 
-          console.log('device orientation 3: '+deviceOreintation);
+          console.log('device orientation 3: '+deviceOreintation);*/
          
+         //$.when(navigator.compass.getCurrentHeading(onSuccess, onError)).then(heatos());
+         var t0=performance.now();
+         navigator.compass.getCurrentHeading(onSuccess, onError);
+         var t1 = performance.now();
+        console.log('performance time :'+(t1-t0));
+         //console.log('device orientation 3: '+deviceOreintation);
 
+          
+            console.log('device orientation 3: '+deviceOreintation);
          //alert('biba '+biba);
           var heatMap = [];
           var der='';
@@ -110,15 +119,19 @@ function startRangingBeacons(){
               heatMap = eastHeatMap;
               console.log("i m in east" +deviceOreintation);
             }
-          
-        estimote.beacons.requestAlwaysAuthorization();
+         
+        
+        
+
+        
         estimote.beacons.startRangingBeaconsInRegion(
           {}, // Empty region matches all beacons.
 
           
 
           function(beaconInfo) {
-             var t0=performance.now();
+              t0=performance.now();
+              
             //Array to stock Data from Beacons what we found
          
 
@@ -191,6 +204,8 @@ function startRangingBeacons(){
                 //t0=performance.now();
 
             e++;
+            t1 = performance.now();
+        console.log('performance time biba:'+(t1-t0));
 
             if(e > 5){
               
@@ -357,14 +372,15 @@ function startRangingBeacons(){
             rssi_1222 =[];
             rssi_1211 =[];
             e = 0;
-             var t1 = performance.now();
-            console.log('performance time :'+(t1-t0));
-
-
+             
+        var t0=performance.now();
+         navigator.compass.getCurrentHeading(onSuccess, onError);
+         var t1 = performance.now();
+        console.log('performance time 2 :'+(t1-t0));
         }
       },
           function(errorMessage) {  alert('Ranging error: ' + errorMessage)  });
-
+     
 
       }//End Of startRangingBeacons
 
@@ -460,15 +476,16 @@ function startRangingBeacons(){
              //return hd;
       }//Ende of orientationDevice
 
-function onSuccess(heading) {
-    alert('Heading: ' + heading.magneticHeading);
-};
+function onSuccess(heading,_callback) {
+    //alert('Heading: ' + heading.magneticHeading);
+    deviceOreintation = heading.magneticHeading;
+}
 
 function onError(error) {
     alert('CompassError: ' + error.code);
-};
+}
 
-navigator.compass.getCurrentHeading(onSuccess, onError);
+
 
 
     //Begin of Sensor Fusion (Accelerometer+Gyroscope+Compass) with Kahlman filter for Device Orientation

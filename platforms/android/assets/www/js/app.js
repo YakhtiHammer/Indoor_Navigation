@@ -14,10 +14,25 @@ document.addEventListener('deviceready',function(){
 
          // check if Bluetooth is on:
         bluetoothSerial.isEnabled(listPorts,notEnabled);
+        estimote.beacons.requestAlwaysAuthorization();
         console.log('compass '+navigator.compass);
 //**********************************************************
 //**********************************************************
 //**********************************************************
+/*******compass*******/
+
+for(i =0;i<3;i++){
+navigator.compass.getCurrentHeading(function onSuccess(heading,_callback) {
+                            //alert('Heading: ' + heading.magneticHeading);
+                            deviceOreintation = heading.magneticHeading;
+                        }, 
+                        function onError(error) {
+                            alert('CompassError: ' + error.code);
+                        }
+);
+}
+
+/**************/
 
         navigator.splashscreen.hide();
 
