@@ -190,6 +190,22 @@ module.exports = [
         "runs": true
     },
     {
+        "id": "cordova-plugin-device-motion.Acceleration",
+        "file": "plugins/cordova-plugin-device-motion/www/Acceleration.js",
+        "pluginId": "cordova-plugin-device-motion",
+        "clobbers": [
+            "Acceleration"
+        ]
+    },
+    {
+        "id": "cordova-plugin-device-motion.accelerometer",
+        "file": "plugins/cordova-plugin-device-motion/www/accelerometer.js",
+        "pluginId": "cordova-plugin-device-motion",
+        "clobbers": [
+            "navigator.accelerometer"
+        ]
+    },
+    {
         "id": "cordova-plugin-device-orientation.CompassError",
         "file": "plugins/cordova-plugin-device-orientation/www/CompassError.js",
         "pluginId": "cordova-plugin-device-orientation",
@@ -212,22 +228,6 @@ module.exports = [
         "clobbers": [
             "navigator.compass"
         ]
-    },
-    {
-        "id": "cordova-plugin-device-motion.Acceleration",
-        "file": "plugins/cordova-plugin-device-motion/www/Acceleration.js",
-        "pluginId": "cordova-plugin-device-motion",
-        "clobbers": [
-            "Acceleration"
-        ]
-    },
-    {
-        "id": "cordova-plugin-device-motion.accelerometer",
-        "file": "plugins/cordova-plugin-device-motion/www/accelerometer.js",
-        "pluginId": "cordova-plugin-device-motion",
-        "clobbers": [
-            "navigator.accelerometer"
-        ]
     }
 ];
 module.exports.metadata = 
@@ -238,8 +238,8 @@ module.exports.metadata =
     "cordova-plugin-estimote": "0.8.0",
     "cordova-plugin-compat": "1.0.0",
     "cordova-plugin-file": "4.3.3",
-    "cordova-plugin-device-orientation": "1.0.7",
-    "cordova-plugin-device-motion": "1.2.5"
+    "cordova-plugin-device-motion": "1.2.5",
+    "cordova-plugin-device-orientation": "1.0.7"
 };
 // BOTTOM OF METADATA
 });

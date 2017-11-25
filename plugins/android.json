@@ -19,10 +19,10 @@
     "cordova-plugin-file": {
       "PACKAGE_NAME": "io.cordova.hellocordova"
     },
-    "cordova-plugin-device-orientation": {
+    "cordova-plugin-device-motion": {
       "PACKAGE_NAME": "io.cordova.hellocordova"
     },
-    "cordova-plugin-device-motion": {
+    "cordova-plugin-device-orientation": {
       "PACKAGE_NAME": "io.cordova.hellocordova"
     }
   },

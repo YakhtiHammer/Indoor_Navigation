@@ -26,8 +26,8 @@
       "cordova-plugin-bluetooth-serial": {},
       "cordova-plugin-estimote": {},
       "cordova-plugin-file": {},
-      "cordova-plugin-device-orientation": {},
-      "cordova-plugin-device-motion": {}
+      "cordova-plugin-device-motion": {},
+      "cordova-plugin-device-orientation": {}
     },
     "platforms": [
       "android"

@@ -14,6 +14,7 @@ document.addEventListener('deviceready',function(){
 
          // check if Bluetooth is on:
         bluetoothSerial.isEnabled(listPorts,notEnabled);
+        console.log('compass '+navigator.compass);
 //**********************************************************
 //**********************************************************
 //**********************************************************

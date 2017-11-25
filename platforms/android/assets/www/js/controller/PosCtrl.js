@@ -68,29 +68,47 @@ function startRangingBeacons(){
           var rssi_1222 =[];
           var rssi_1211 =[];
           var e = 0;
+          var deviceOreintation;
 
+        //  do{
+        //   deviceOreintation=orientationDevice(function(hd){ return hd;});
+        //   console.error('device orientation : '+deviceOreintation);
+        // }while(deviceOreintation == undefined || deviceOreintation == 0)
+         //orientationDevice(function(hd){ console.log(hd);});
+          //console.log('device orientation 1: '+deviceOreintation);
+          orientationDevice(function(hd){ deviceOreintation=hd;
+            console.log('device orientation 2: '+deviceOreintation);
+          });
+          //console.log('device orientation 2: '+deviceOreintation);
+          setTimeout(function(){},500);
+
+          console.log('device orientation 3: '+deviceOreintation);
+         
+
+         //alert('biba '+biba);
           var heatMap = [];
           var der='';
          
-          var deviceOreintation = orientationDevice();
+        
+
           
             //alert('device ortientation : '+deviceOreintation);
             // start 4 directions
             if(deviceOreintation>=105 && deviceOreintation<195){
               heatMap = southHeatMap;
-              //console.log("i m in south" +deviceOreintation);
+              console.log("i m in south" +deviceOreintation);
             }
             if(deviceOreintation>=195 && deviceOreintation<285){
               heatMap = westHeatMap;
-              //console.log("i m in west" +deviceOreintation);
+              console.log("i m in west" +deviceOreintation);
             }
             if((deviceOreintation>=285 && deviceOreintation<360) || (deviceOreintation>=0 && deviceOreintation<15)){
               heatMap = northHeatMap;
-              //console.log("i m in north" +deviceOreintation);
+              console.log("i m in north" +deviceOreintation);
             }
             if(deviceOreintation>=15 && deviceOreintation<105){
               heatMap = eastHeatMap;
-              //console.log("i m in east" +deviceOreintation);
+              console.log("i m in east" +deviceOreintation);
             }
           
         estimote.beacons.requestAlwaysAuthorization();
@@ -428,16 +446,20 @@ function startRangingBeacons(){
       }//Ende of accelerationDevice
       
       //Begin of All orientationDevice to get the Orientation
-      function orientationDevice(){
-
+      function orientationDevice(_callback){
+            
              navigator.compass.getCurrentHeading(
 
-                        function(heading){      hd = heading.magneticHeading;},
+                        function(heading){      hd = heading.magneticHeading;
+                          _callback(hd);
+                          //biba = 300;
+                        },
                         function(error){    alert('CompassError: ' + error.code);}
               );
 
-             return hd;
+             //return hd;
       }//Ende of orientationDevice
+
 
     //Begin of Sensor Fusion (Accelerometer+Gyroscope+Compass) with Kahlman filter for Device Orientation
     /*function Sensorfusion(){
