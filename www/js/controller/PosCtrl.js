@@ -1,6 +1,8 @@
 
 function PosCtrl($scope,$http){
  $(function(){
+
+
 $scope.panel = 0;
 
  $scope.search = function(){
@@ -54,31 +56,24 @@ startRangingBeacons();
 ===
 */
 
-
 function startRangingBeacons(){
+
       //alert(heatMap["B"][1].UUID);
       //alert(heatMap.length);
     // Request authorisation.
-          var t_beacon=[];
+          var t_beacon=  [];
           var rssi_1218 =[];
           var rssi_1219 =[];
           var rssi_1221 =[];
           var rssi_1222 =[];
           var rssi_1211 =[];
           var e = 0;
-        estimote.beacons.requestAlwaysAuthorization();
-        estimote.beacons.startRangingBeaconsInRegion(
-          {}, // Empty region matches all beacons.
-
-          function(beaconInfo) {
-
-            //Array to stock Data from Beacons what we found
-         
 
           var heatMap = [];
           var der='';
+         
           var deviceOreintation = orientationDevice();
-
+          
             //alert('device ortientation : '+deviceOreintation);
             // start 4 directions
             if(deviceOreintation>=105 && deviceOreintation<195){
@@ -97,6 +92,18 @@ function startRangingBeacons(){
               heatMap = eastHeatMap;
               //console.log("i m in east" +deviceOreintation);
             }
+          
+        estimote.beacons.requestAlwaysAuthorization();
+        estimote.beacons.startRangingBeaconsInRegion(
+          {}, // Empty region matches all beacons.
+
+          
+
+          function(beaconInfo) {
+             var t0=performance.now();
+            //Array to stock Data from Beacons what we found
+         
+
 
               // end 4 directions
 
@@ -150,22 +157,26 @@ function startRangingBeacons(){
 
            
             $.each(beaconInfo.beacons, function(key, beacon){
-                      beaconInfo.beacons.sort(function(beacon1, beacon2) {
-                      return beacon1.rssi < beacon2.rssi; });
+
                       var string_UUID = beacon.proximityUUID;
 											var lengthUUID = string_UUID.length;
 											var lastUUID = string_UUID.substr(lengthUUID - 4);
-                      if( lastUUID == '1218' ) rssi_1218.push(beacon.rssi)
-											if( lastUUID == '1219' ) rssi_1219.push(beacon.rssi)
-											if( lastUUID == '1221' ) rssi_1221.push(beacon.rssi)
-											if( lastUUID == '1222' ) rssi_1222.push(beacon.rssi)
-											if( lastUUID == '1211' ) rssi_1211.push(beacon.rssi)
+                      if( lastUUID == '1218' ) rssi_1218.push(beacon.rssi);
+											if( lastUUID == '1219' ) rssi_1219.push(beacon.rssi);
+											if( lastUUID == '1221' ) rssi_1221.push(beacon.rssi);
+											if( lastUUID == '1222' ) rssi_1222.push(beacon.rssi);
+											if( lastUUID == '1211' ) rssi_1211.push(beacon.rssi);
                       //t_beacon.push({ "uuid" :beacon.proximityUUID,"rssi" : beacon.rssi});
+                
+            });
+            
+                //t0=performance.now();
 
+            e++;
 
-            });e++;
-            if(e > 9){
-
+            if(e > 5){
+              
+              
 
               //console.log("heatMap :"+heatMap);
              
@@ -224,18 +235,18 @@ function startRangingBeacons(){
               /*console.log("distance of 1218 is : "+dist_1218+"\n");
               console.log("distance of 1219 is : "+dist_1219+"\n");
               console.log("distance of 1221 is : "+dist_1221+"\n");
-              console.log("distance of 1222 is : "+dist_1222+"\n\n");*/
+              console.log("distance of 1222 is : "+dist_1222+"\n\n");
 
-              // console.log("1218 x :"+BeaconsTab[0].x+" 1218 y: "+BeaconsTab[0].y+"\n");
-             //t_beacon.push(elem);
+              console.log("1218 x :"+BeaconsTab[0].x+" 1218 y: "+BeaconsTab[0].y+"\n");
+             t_beacon.push(elem);
               
               t_beacon.sort(function(beacon1, beacon2) {
                       return beacon1.distance > beacon2.distance; });
 
-              /*for(i=0;i<t_beacon.length;i++){
+              for(i=0;i<t_beacon.length;i++){
                 console.log("uuid :"+t_beacon[i].uuid+", distance: "+t_beacon[i].distance+" x: "+t_beacon[i].x+" y: "+t_beacon[i].y+"\n");
-              }*/
-              /*var koraa = t_beacon.length;
+              }
+              var koraa = t_beacon.length;
               for(var i =0;i<koraa;i++){
                   console.log('x ='+t_beacon[i].x+' y= '+t_beacon[i].y+' d= '+t_beacon[i].distance+' RSSI : '+t_beacon[i].rssi);
 
@@ -250,34 +261,48 @@ function startRangingBeacons(){
 
               // start show the position on the map 
 
-              $('#ShowBeacons').append("<p> x :"+pos_device.x+" y: "+pos_device.y+'</p>');*/
+              $('#ShowBeacons').append("<p> x :"+pos_device.x+" y: "+pos_device.y+'</p>');
               
 
-            //alert("the length of t_beacon is :"+t_beacon.length);
+            alert("the length of t_beacon is :"+t_beacon.length);*/
             
             // algorthme of heatMap
-            
             var errorTab;
             var min=Math.pow(10,20);
             var err=0;
             var Zonefinale;
+
             for(var i=0;i<heatMap.length;i++){
-            var error = 0;
-            var zone  = heatMap[i].zone;
-            //console.log("zone :"+zone);
-            var gefunden = false;
+                var error = 0;
+                var zone  = heatMap[i].zone;
+                var gefunden = false;
+                //var temp = heatMap[i].listBeacons;
+                //console.log('temp: '+temp);
+                // start the hashMap
+
+
+                /*var kvArray = [{key: 1, value: 10}, 
+                               {key: 2, value: 20}, 
+                               {key: 3, value: 30}];*/
+
+               /* var reformattedTemp = temp.map(mapinos);
+                console.log('reformattedTemp: '+reformattedTemp);*/
+
+                // end the hashMap
 
                 for(k=0;k<t_beacon.length;k++){
 
                     for(j=0;j<heatMap[i].listBeacons.length;j++){
-                      //console.log("rssi t_beacon : "t_beacon[k].rssi+" ,rssi of listBeacons :"+heatMap.listBeacons[j].rssi);
                         if(t_beacon[k].uuid.toLowerCase() == heatMap[i].listBeacons[j].uuid.toLowerCase()){
                           
                           gefunden=true;
                           err = Math.pow(Math.abs(heatMap[i].listBeacons[j].rssi)-Math.abs(t_beacon[k].rssi),2);
-                          //console.log("err :"+err);
-                          }
+                        }
                     }
+                    
+                   /* if(reformattedTemp.(t_beacon[k].uuid.toLowerCase())){
+                      err = Math.pow(Math.abs(reformattedTemp.(t_beacon[k].uuid.toLowerCase()))-Math.abs(t_beacon[k].rssi),2);
+                    }*/
                     if(!gefunden){
                     err = Math.pow(t_beacon[k].rssi,2);
                     }
@@ -288,17 +313,19 @@ function startRangingBeacons(){
                 if(min>error){
                           min = error;
                           Zonefinale = zone;
-                          }
+                }
             }
             console.log("min ="+min+" zone="+Zonefinale);
             //alert('zone: '+Zonefinale+', direction : '+der);
 
             var lengthZone = zones.length;
             for(i =0;i<lengthZone;i++){
-              if(zones[i].zone == Zonefinale) 
+              if(zones[i].zone == Zonefinale){ 
                 pos_device = { "x": zones[i].x,  "y": zones[i].y };
+              }
             }
-             d3.select("#Device_position").transition().duration(800)
+
+            d3.select("#Device_position").transition().duration(800)
                     .attr("visibility","visible")
                     .attr("cx",pos_device.x)
                     .attr("cy",pos_device.y );
@@ -312,10 +339,9 @@ function startRangingBeacons(){
             rssi_1222 =[];
             rssi_1211 =[];
             e = 0;
-            
-           
-             //d3.select(".zones").style({"fill":"#dddd9d"});
-             //d3.select("#"+Zonefinale).style({"fill":"#e74c3c"});
+             var t1 = performance.now();
+            console.log('performance time :'+(t1-t0));
+
 
         }
       },
@@ -338,6 +364,13 @@ function startRangingBeacons(){
                         }
                       }
      }*/ //End of GetXY
+
+     // the function of map
+     function mapinos(obj) { 
+                   var rObj = {};
+                   rObj[obj.uuid] = obj.rssi;
+                   return rObj;
+                }
 
      // calculate the standart of some data
      function standart_array(rssi_array, mean, sum){
@@ -378,7 +411,7 @@ function startRangingBeacons(){
      }
 
       //Begin Of accelerationDevice get acceleration Device
-      /*function accelerationDevice(){
+      function accelerationDevice(){
         var acc;
         $('#ShowBeacons').empty();
           setInterval(function(){navigator.accelerometer.getCurrentAcceleration(
@@ -393,7 +426,7 @@ function startRangingBeacons(){
           function() {alert('onError!');}
         );},5000);
       }//Ende of accelerationDevice
-      */
+      
       //Begin of All orientationDevice to get the Orientation
       function orientationDevice(){
 
