@@ -10,6 +10,21 @@
             </intent-filter>
         </activity>
         <service android:exported="false" android:name="com.estimote.sdk.service.BeaconService" />
+        <receiver android:name="org.altbeacon.beacon.startup.StartupBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+            </intent-filter>
+        </receiver>
+        <service android:enabled="true" android:exported="true" android:isolatedProcess="false" android:label="iBeacon" android:name="org.altbeacon.beacon.service.BeaconService" />
+        <service android:enabled="true" android:name="org.altbeacon.beacon.BeaconIntentProcessor">
+            <meta-data android:name="background" android:value="true" />
+            <intent-filter android:priority="1">
+                <action android:name="com.unarin.cordova.beacon.IBeaconPlugin.DID_RANGING" />
+                <action android:name="com.unarin.cordova.beacon.IBeaconPlugin.DID_MONITORING" />
+            </intent-filter>
+        </service>
     </application>
     <uses-sdk android:minSdkVersion="16" android:targetSdkVersion="25" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
@@ -17,4 +32,5 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 </manifest>

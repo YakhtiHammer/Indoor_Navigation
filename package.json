@@ -10,7 +10,9 @@
   "author": "Apache Cordova Team",
   "license": "Apache-2.0",
   "dependencies": {
+    "com.unarin.cordova.beacon": "git+https://github.com/petermetz/cordova-plugin-ibeacon.git",
     "cordova-android": "^6.2.3",
+    "cordova-ios": "^4.5.4",
     "cordova-plugin-bluetooth-serial": "^0.4.7",
     "cordova-plugin-compat": "^1.0.0",
     "cordova-plugin-device-motion": "^1.2.5",
@@ -27,10 +29,12 @@
       "cordova-plugin-estimote": {},
       "cordova-plugin-file": {},
       "cordova-plugin-device-motion": {},
-      "cordova-plugin-device-orientation": {}
+      "cordova-plugin-device-orientation": {},
+      "com.unarin.cordova.beacon": {}
     },
     "platforms": [
-      "android"
+      "android",
+      "ios"
     ]
   }
 }

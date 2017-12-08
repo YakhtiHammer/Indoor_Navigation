@@ -228,6 +228,56 @@ module.exports = [
         "clobbers": [
             "navigator.compass"
         ]
+    },
+    {
+        "id": "com.unarin.cordova.beacon.underscorejs",
+        "file": "plugins/com.unarin.cordova.beacon/www/lib/underscore-min-1.6.js",
+        "pluginId": "com.unarin.cordova.beacon",
+        "runs": true
+    },
+    {
+        "id": "com.unarin.cordova.beacon.Q",
+        "file": "plugins/com.unarin.cordova.beacon/www/lib/q.min.js",
+        "pluginId": "com.unarin.cordova.beacon",
+        "runs": true
+    },
+    {
+        "id": "com.unarin.cordova.beacon.LocationManager",
+        "file": "plugins/com.unarin.cordova.beacon/www/LocationManager.js",
+        "pluginId": "com.unarin.cordova.beacon",
+        "merges": [
+            "cordova.plugins"
+        ]
+    },
+    {
+        "id": "com.unarin.cordova.beacon.Delegate",
+        "file": "plugins/com.unarin.cordova.beacon/www/Delegate.js",
+        "pluginId": "com.unarin.cordova.beacon",
+        "runs": true
+    },
+    {
+        "id": "com.unarin.cordova.beacon.Region",
+        "file": "plugins/com.unarin.cordova.beacon/www/model/Region.js",
+        "pluginId": "com.unarin.cordova.beacon",
+        "runs": true
+    },
+    {
+        "id": "com.unarin.cordova.beacon.Regions",
+        "file": "plugins/com.unarin.cordova.beacon/www/Regions.js",
+        "pluginId": "com.unarin.cordova.beacon",
+        "runs": true
+    },
+    {
+        "id": "com.unarin.cordova.beacon.CircularRegion",
+        "file": "plugins/com.unarin.cordova.beacon/www/model/CircularRegion.js",
+        "pluginId": "com.unarin.cordova.beacon",
+        "runs": true
+    },
+    {
+        "id": "com.unarin.cordova.beacon.BeaconRegion",
+        "file": "plugins/com.unarin.cordova.beacon/www/model/BeaconRegion.js",
+        "pluginId": "com.unarin.cordova.beacon",
+        "runs": true
     }
 ];
 module.exports.metadata = 
@@ -239,7 +289,8 @@ module.exports.metadata =
     "cordova-plugin-compat": "1.0.0",
     "cordova-plugin-file": "4.3.3",
     "cordova-plugin-device-motion": "1.2.5",
-    "cordova-plugin-device-orientation": "1.0.7"
+    "cordova-plugin-device-orientation": "1.0.7",
+    "com.unarin.cordova.beacon": "3.4.1"
 };
 // BOTTOM OF METADATA
 });

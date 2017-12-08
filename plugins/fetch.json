@@ -54,5 +54,13 @@
     },
     "is_top_level": true,
     "variables": {}
+  },
+  "com.unarin.cordova.beacon": {
+    "source": {
+      "type": "registry",
+      "id": "https://github.com/petermetz/cordova-plugin-ibeacon.git"
+    },
+    "is_top_level": true,
+    "variables": {}
   }
 }

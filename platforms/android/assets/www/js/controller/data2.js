@@ -2,18 +2,18 @@
 // the zone and their cordinations 
 zones= [
 
-    { "zone": "A", "x": 296.0,   "y":32.39  },
-    { "zone": "B", "x": 296.0,   "y":32.39  },
-    { "zone": "C", "x": 267.40,  "y":32.39  },
-    { "zone": "D", "x": 267.40,  "y":32.39   },
-    { "zone": "E", "x": 219.15,  "y":32.39  },
-    { "zone": "F", "x": 167.42,  "y":32.39  },
-    { "zone": "J", "x": 167.42,  "y":32.39 },
-    { "zone": "H", "x": 144.66,  "y":32.39   },
-    { "zone": "I", "x": 144.66,  "y":32.39  },
-    { "zone": "G", "x": 82.84,   "y":32.39  },
-    { "zone": "K", "x": 34.05,   "y":32.39   },
-    { "zone": "L", "x": 34.05,   "y":32.39  },
+    { "zone": "A", "x": 303.959,  "y":31.436 },
+    { "zone": "B", "x": 303.959,  "y":31.436 },
+    { "zone": "C", "x": 253.412,  "y":31.326 },
+    { "zone": "D", "x": 253.412,  "y":31.326 },
+    { "zone": "E", "x": 219.15,   "y":32.39  },
+    { "zone": "F", "x": 176.345,  "y":31.407 },
+    { "zone": "J", "x": 176.345,  "y":31.407 },
+    { "zone": "H", "x": 118.141,  "y":31.352 },
+    { "zone": "I", "x": 118.141,  "y":31.352 },
+    { "zone": "G", "x": 82.84,    "y":32.39  },
+    { "zone": "K", "x": 50.718,   "y":30.878 },
+    { "zone": "L", "x": 50.718,   "y":30.878 },
     ];
 
 // data of the each beacon 
@@ -38,6 +38,22 @@ zimmer_name = [
     ];
 
 //the zimmer with their ids
+zonesNameId ={
+"A":"circle17",
+"B":"circle17",
+"C":"circle18",
+"D":"circle18",
+"E":"circle191",
+"F":"circle19",
+"J":"circle19",
+"H":"circle20",
+"I":"circle20",
+"G":"circle211",
+"K":"circle21",
+"L":"circle21"
+};
+
+//the zimmer with their ids
 zimmerNameId ={
 "zimmer322":"circle22",
 "zimmer321":"circle21",
@@ -49,20 +65,24 @@ zimmerNameId ={
  
 // the cordinates of the maps, the x and y of each circle on the map 
 mapCoordnidates ={
-    "circle17":     {"x": 303.959, "y": 31.436 },
-    "circle18":     {"x": 253.412, "y": 31.326},
-    "circle19":     {"x": 176.345, "y": 31.407},
-    "circle20":     {"x": 118.141, "y": 31.352},
-    "circle21":     {"x": 50.718,  "y": 30.878},
-    "circle22":     {"x": 11.673,  "y": 31.173}
+    "circle17":       {"x": 303.959, "y": 30.878},
+    "circle18":       {"x": 253.412, "y": 30.878},
+    "circle191":     {"x": 215.877, "y": 30.878},
+    "circle19":       {"x": 176.345, "y": 30.878},
+    "circle20":       {"x": 118.141, "y": 30.878},
+    "circle211":     {"x": 80.687,  "y": 30.878},
+    "circle21":       {"x": 50.718,  "y": 30.878},
+    "circle22":       {"x": 11.673,  "y": 30.878}
         };// end mapCoordinates
 
 // the graph of the map, so the distance between each circl in the map
 map = {  circle17:{circle18:3},
   	     circle18:{circle17:3,circle19:3},
-  	     circle19:{circle18:3,circle20:3},
+  	     circle19:{circle20:3,circle191:3},
+         circle191:{circle19:3,circle18:3},
   	     circle20:{circle19:3,circle21:3},
-  	     circle21:{circle20:3,circle22:3},
+  	     circle211:{circle21:3,circle20:3},
+         circle21:{circle211:3,circle22:3},
   	     circle22:{circle21:3}
               };// end of the graph
 //heatmap

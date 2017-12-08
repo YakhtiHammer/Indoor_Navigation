@@ -1,23 +1,29 @@
 
-document.addEventListener("deviceready", onDeviceReady, false);
+/*document.addEventListener("deviceready", onDeviceReady, false);
 function onDeviceReady() {
     startRangingBeacons();
-}
+}*/
+
 
 
 function PosCtrl($scope,$http){
-  startRangingBeacons();
   $(function(){
 
-    $scope.panel = 0;
+      $scope.panel = 0;
+
       $scope.search = function(){
       // to switch between the panels
-      $scope.panel  = 1;
-      findWay();
+      $('.loader').show ();
+      changePanel(1);
+      firstTime = true ;
+
       startRangingBeacons();
+      //findWay(Zonefinale);
        //orientationDevice();
 
     }
+
+   
       /* automatic search */
        $scope.selectedRoom = "";
 
@@ -59,13 +65,22 @@ function PosCtrl($scope,$http){
     ===
     ===
     */
+   
+
+   
+
 
     function startRangingBeacons(){
+      // if(firstTime){
+      //               $scope.loader=true;
+      //             }
 
+
+        
         //alert(heatMap["B"][1].UUID);
         //alert(heatMap.length);
         // Request authorisation.
-
+        t0=performance.now();
                   var t_beacon=  [];
                   var rssi_1218 =[];
                   var rssi_1219 =[];
@@ -73,7 +88,7 @@ function PosCtrl($scope,$http){
                   var rssi_1222 =[];
                   var rssi_1211 =[];
                   var e = 0;
-        //var deviceOreintation;
+              //var deviceOreintation;
 
             //  do{
             //   deviceOreintation=orientationDevice(function(hd){ return hd;});
@@ -128,8 +143,8 @@ function PosCtrl($scope,$http){
             estimote.beacons.startRangingBeaconsInRegion(
               {}, // Empty region matches all beacons.
               
-              function(beaconInfo) {
-                t0=performance.now();
+          function(beaconInfo) {
+                
                
                 $.each(beaconInfo.beacons, function(key, beacon){
 
@@ -153,7 +168,10 @@ function PosCtrl($scope,$http){
 
             if(e > 9){
 
-                  if(rssi_1218.length>0){
+
+                  //with the other algorithm
+
+                  /*if(rssi_1218.length>0){
                     var sum_1218 = rssi_1218.reduce(sum_array);
                     var mean_1218 = sum_1218 / rssi_1218.length;
                     var standat_1218 = standart_array(rssi_1218, mean_1218, sum_1218);
@@ -189,6 +207,17 @@ function PosCtrl($scope,$http){
       							var standat_1211 = standart_array(rssi_1211, mean_1211, sum_1211);
       							var final_rssi_1211 = final_rssi(rssi_1211, mean_1211, standat_1211); 
                     t_beacon.push({"uuid":"b9407f30-f5f8-466e-aff9-25556b571211","rssi": final_rssi_1211});
+                  }*/
+
+                  // with kalman filter
+                  kalmanFilter(rssi_1218,t_beacon,"b9407f30-f5f8-466e-aff9-25556b571218");
+                  kalmanFilter(rssi_1219,t_beacon,"b9407f30-f5f8-466e-aff9-25556b571219");
+                  kalmanFilter(rssi_1221,t_beacon,"b9407f30-f5f8-466e-aff9-25556b571221");
+                  kalmanFilter(rssi_1222,t_beacon,"b9407f30-f5f8-466e-aff9-25556b571222");
+                  kalmanFilter(rssi_1211,t_beacon,"b9407f30-f5f8-466e-aff9-25556b571211");
+
+                  for(var i;i<t_beacon.length;i++){
+                    console.log('uuid : '+t_beacon[i].uuid+' rssi :'+t_beacon[i].rssi)
                   }
                 
                   // algorithme of heatMap
@@ -196,7 +225,6 @@ function PosCtrl($scope,$http){
                   var min=Math.pow(10,20);
                   var err=0;
                   var Zonefinale;
-
                   for(var i=0;i<heatMap.length;i++){
                       var error = 0;
                       var zone  = heatMap[i].zone;
@@ -237,6 +265,15 @@ function PosCtrl($scope,$http){
                           .attr("visibility","visible")
                           .attr("cx",pos_device.x)
                           .attr("cy",pos_device.y );
+                  d3.select("#Device_position_error").transition().duration(800)
+                          .attr("visibility","visible")
+                          .attr("cx",pos_device.x)
+                          .attr("cy",pos_device.y );
+
+                   // d3.select("#directionOfPosition").transition().duration(800)
+                   //        .attr("visibility","visible")
+                   //        .attr("x",pos_device.x)
+                   //        .attr("y",pos_device.y );
                   
                   // end heat map lagorithm 
 
@@ -252,9 +289,20 @@ function PosCtrl($scope,$http){
                    navigator.compass.getCurrentHeading(onSuccess, onError);
                    //var t1 = performance.now();
                   //console.log('performance time 2 :'+(t1-t0));
+                  t1=performance.now();
+                  console.log(' performance time : '+(t1-t0));
+                  
+                  if(firstTime){
+                    firstTime = false;
+
+                    findWay(Zonefinale);
+                    $('.loader').hide();
+                     //$scope.panel  = 1;
+                  }
+
             }
-            t1=performance.now();
-            console.log(e+'. performance time : '+(t1-t0));
+
+            
           },
               function(errorMessage) {  alert('Ranging error: ' + errorMessage)  });
          
@@ -276,6 +324,39 @@ function PosCtrl($scope,$http){
                       }
      }*/ //End of GetXY
 
+     // kalman filer
+     function kalmanFilter(tableToFilter,tableToPush,uuid) {
+      console.log('i m in kalman');
+      var A = 1;
+      var H = 1;
+      var Q = 1e-6;
+      var R = 2;
+      var XK = -70;
+      var PK = 1;
+      var X;
+      var K;
+      for(var i=0; i<tableToFilter.length;i++ ){
+           //Prediction Stage
+          var XK1 = XK;
+          PK = PK + Q;
+          //Update Stage
+          K = PK / (PK + R);
+          X = XK1 + K*(tableToFilter[i] - XK1);
+          PK = (1 - K) * PK;
+          XK = X;
+      }
+      tableToPush.push({
+        "uuid": uuid,
+        "rssi": X
+      });
+      //console.log('uuid in kalman '+uuid+' rssi '+X);
+    }
+     //change the panel
+
+    function changePanel(panele){
+      $scope.panel = panele;
+      //alert('ana panel '+$scope.panel);
+    }
      // the function of map
     function mapinos(obj) { 
                    var rObj = {};
@@ -459,19 +540,17 @@ function PosCtrl($scope,$http){
     ==
     ==
     */
-    d3.select("#svg8").append("path")
-                    .attr("visibility","hidden")
-                    .attr("id","theWay");
-    function findWay(){
+    
+    function findWay(source){
 
-      d3.selectAll(".knoten").attr("visibility", "hidden");
+      
         
       var id_room = $('#room').val().split(" ").join("").toLowerCase();
       id_room = zimmerNameId[id_room];
       
       graph = new Graph(map);
       var shortWay = [];
-      shortWay = graph.findShortestPath('circle17',id_room);
+      shortWay = graph.findShortestPath(zonesNameId[source],id_room);
       console.log("the short way to the destination : \n"+shortWay);
        var len = shortWay.length;
        // the points of each noud which will be drawed
@@ -492,32 +571,76 @@ function PosCtrl($scope,$http){
       // draw the line of the points  until the destination
       d3.select("#theWay").attr("visibility","hidden");
 
+      // hide the distination to draw it again
+      // d3.select("#destination").attr("visibility","hidden");
+
       var lineFunction = d3.svg.line()
                                .x(function(d) { return d.x; })
                                .y(function(d) { return d.y; })
                                .interpolate("linear");
+      // the arrow of the end
+       var defs = d3.select("#svg8").append("svg:defs");
+
+      /* here to generate the marker shape and assign it the "arrow" id */
+        defs.append("svg:marker")
+          .attr("id", "arrow")
+          .attr("viewBox", "0 0 10 10")
+          .attr("refX", 1)
+          .attr("refY", 5)
+          .attr("markerWidth", 6)
+          .attr("markerHeight", 6)
+          .attr("orient", "auto")
+          .attr('fill','#3498db')
+          .append('svg:path')
+          .attr('d', "M 0 0 L 10 5 L 0 10 z");
 
       d3.select("#theWay").attr("d", lineFunction(points))
                           .attr("id","theWay")
                           .attr("stroke", "#3498db")
-                          .attr("stroke-width", 1)
+                          .attr("stroke-width", 2)
                           .attr("fill", "none")
-                          .attr("visibility","visible");
+                          .attr("visibility","visible")
+                          .attr('marker-end', 'url(#arrow)');
       // draw the destination
-       d3.select("#"+id_room)
-                        .style("fill","#3498db")
-                        .style("z-index",10)
-                        .attr("r",2)
-                        .attr("visibility","visible");
+       // d3.select("#"+id_room)
+       //                  .style("fill","#d35400")
+       //                  .attr("r",3)
+       //                  .attr('id','destination')
+       //                  .attr("visibility","visible");
     }// end finWay
+
+    //draw the path
+    d3.select("#svg8").append("path")
+                      .attr("visibility","hidden")
+                      .attr("id","theWay");
+
+    // hiide all the map knoten
+    d3.selectAll(".knoten").attr("visibility", "hidden");
 
     // the position of the device
     d3.select("#svg8").append("circle")
               .attr("id","Device_position")
-              .attr("r", 3)
+              .attr("r", 5)
               .attr("visibility", "hidden")
               .style("fill", "#3498db");
-    });
+    
+    d3.select("#svg8").append("circle")
+                  .attr("id","Device_position_error")
+                  .attr("r", 20)
+                  .attr("visibility", "hidden")
+                  .style("fill", "#3498db")
+                  .style("opacity", 0.5);
+       
+      d3.select('#svg8').append("svg:image")
+      .attr("xlink:href", "plane.jpg")
+      .attr('id','directionOfPosition')
+      .attr('visibility','hidden')
+      .attr("width", 20)
+      .attr("height", 20);
+        
+        });
+   
+
 
     // zoom
 
@@ -527,13 +650,14 @@ function PosCtrl($scope,$http){
           .attr("r", 3)
           .attr("visibility", "visible")
           .style("fill", "purple");*/
-
+    // draw the destination
+       
 
     var svg = d3.select("#svg8");
-    svg.call(d3.behavior.zoom().scaleExtent([1, 20]).on("zoom", zoom));
+    svg.call(d3.behavior.zoom().scaleExtent([1, 200]).on("zoom", zoom));
 
     function zoom() {
       svg.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
     }// end zoom
-  }
+  
 }//Ende PostCtrl

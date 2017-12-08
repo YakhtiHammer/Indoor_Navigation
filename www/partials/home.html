@@ -1,7 +1,7 @@
 
 <section ng-controller="PosCtrl">
 
-
+    <div class="loader" ng-show="loader"></div>
 	 <a class="back" ng-hide="panel==0" ng-click="panel=0">
 	 	<span class="icon-arrow-left"></span>
 	 </a>
@@ -59,16 +59,16 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.80046697"
-     inkscape:cx="322.49591"
+     inkscape:cx="765.17329"
      inkscape:cy="275.29395"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="958"
-     inkscape:window-height="1008"
-     inkscape:window-x="1359"
-     inkscape:window-y="0"
-     inkscape:window-maximized="0" />
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="1358"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
   <metadata
      id="metadata5">
     <rdf:RDF>
@@ -228,7 +228,7 @@
        y="58.793659" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:0.26199999;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:0.327;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332;"
        x="395.09149"
        y="34.490383"
        id="text4604"><tspan
@@ -236,7 +236,7 @@
          id="tspan4602"
          x="395.09149"
          y="34.490383"
-         style="font-size:19.75555611px;opacity:0.122;stroke-width:0.26458332">A</tspan></text>
+         style="font-size:19.75555611px;opacity:0.122;stroke-width:0.26458332;">A</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:0.27099998;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
@@ -295,12 +295,12 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:0.20400002;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="274.72214"
+       x="272.60544"
        y="65.870049"
        id="text4628"><tspan
          sodipodi:role="line"
          id="tspan4626"
-         x="274.72214"
+         x="272.60544"
          y="65.870049"
          style="font-size:19.75555611px;stroke-width:0.26458332">J</tspan></text>
     <text
@@ -359,6 +359,7 @@
          y="69.333916"
          style="font-size:19.75555611px;stroke-width:0.26458332">L</tspan></text>
     <circle
+       class="knoten"
        style="opacity:1;fill:#fa0d0d;fill-opacity:1;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="circle22"
        cx="108.76469"
@@ -366,6 +367,7 @@
        r="1.2854842"
        inkscape:label="#path4650" />
     <circle
+       class="knoten"
        style="opacity:1;fill:#fa0d0d;fill-opacity:1;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="circle21"
        cx="147.80978"
@@ -373,6 +375,7 @@
        r="1.2854842"
        inkscape:label="#path4650-7" />
     <circle
+       class="knoten"
        style="opacity:1;fill:#fa0d0d;fill-opacity:1;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="circle20"
        cx="215.23271"
@@ -380,6 +383,7 @@
        r="1.2854842"
        inkscape:label="#path4650-1" />
     <circle
+       class="knoten"
        style="opacity:1;fill:#fa0d0d;fill-opacity:1;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="circle19"
        cx="273.43665"
@@ -387,6 +391,7 @@
        r="1.2854842"
        inkscape:label="#path4650-13" />
     <circle
+       class="knoten"
        style="opacity:1;fill:#fa0d0d;fill-opacity:1;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="circle18"
        cx="350.504"
@@ -394,6 +399,7 @@
        r="1.2854842"
        inkscape:label="#path4650-2" />
     <circle
+       class="knoten"
        style="opacity:1;fill:#fa0d0d;fill-opacity:1;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="circle17"
        cx="401.05017"
@@ -583,8 +589,25 @@
        sodipodi:open="true"
        d="m 426.87674,59.533192 a 0.70117354,1.6360708 0 0 1 -0.68379,1.635568 0.70117354,1.6360708 0 0 1 -0.71769,-1.554498 0.70117354,1.6360708 0 0 1 0.64822,-1.71262 0.70117354,1.6360708 0 0 1 0.74982,1.469607"
        inkscape:label="#path4800-6-3" />
+    <circle
+       class="knoten"
+       style="opacity:1;fill:#fa0d0d;fill-opacity:1;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="circle211"
+       cx="177.77908"
+       cy="43.847279"
+       r="1.2854842"
+       inkscape:label="#path4650-7" />
+    <circle
+       class="knoten"
+       style="opacity:1;fill:#fa0d0d;fill-opacity:1;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="circle191"
+       cx="312.96841"
+       cy="43.847279"
+       r="1.2854842"
+       inkscape:label="#path4650-7" />
   </g>
 </svg>
+
 
 
 
