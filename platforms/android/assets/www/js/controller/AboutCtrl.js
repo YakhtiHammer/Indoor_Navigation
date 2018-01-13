@@ -88,12 +88,12 @@ $scope.direction = function(){
   $scope.heatMap = function(){
     var zone = $scope.selectedRoompart;
 
-    //alert("der : "+der);
-		var rssi_1218 =[];
+    var t_beacon  =[];
+    var rssi_1218 =[];
     var rssi_1219 =[];
     var rssi_1221 =[];
-    var rssi_1222 =[];
-    var rssi_1211 =[];
+    //var rssi_1222 =[];
+    //var rssi_1211 =[];
     var i = 0;
 
   	 estimote.beacons.requestAlwaysAuthorization();
@@ -112,57 +112,23 @@ $scope.direction = function(){
 								var string_UUID = beacon.proximityUUID;
 								var lengthUUID = string_UUID.length;
 								var lastUUID = string_UUID.substr(lengthUUID - 4);
-                if( lastUUID == '1218' ) rssi_1218.push(beacon.rssi)
+                                if( lastUUID == '1218' ) rssi_1218.push(beacon.rssi)
 								if( lastUUID == '1219' ) rssi_1219.push(beacon.rssi)
 								if( lastUUID == '1221' ) rssi_1221.push(beacon.rssi)
-								if( lastUUID == '1222' ) rssi_1222.push(beacon.rssi)
-								if( lastUUID == '1211' ) rssi_1211.push(beacon.rssi)
+								//if( lastUUID == '1222' ) rssi_1222.push(beacon.rssi)
+								//if( lastUUID == '1211' ) rssi_1211.push(beacon.rssi)
 
             });i++;
                 if(i > 9){
                 estimote.beacons.stopRangingBeaconsInRegion({});
 
-          	
-							if(rssi_1218.length>0){
-                var sum_1218 = rssi_1218.reduce(sum_array);
-                var mean_1218 = sum_1218 / rssi_1218.length;
-                var standat_1218 = standart_array(rssi_1218, mean_1218, sum_1218);
-                var final_rssi_1218 = final_rssi(rssi_1218, mean_1218, standat_1218);
-                elem += '{"uuid":"b9407f30-f5f8-466e-aff9-25556b571218", "rssi": '+final_rssi_1218+'},\n';
-              }
-              
-              if(rssi_1219.length>0){
-                var sum_1219 = rssi_1219.reduce(sum_array);
-                var mean_1219 = sum_1219 / rssi_1219.length;
-                var standat_1219 = standart_array(rssi_1219, mean_1219, sum_1219);
-                var final_rssi_1219 = final_rssi(rssi_1219, mean_1219, standat_1219);
-                elem += '{"uuid":"b9407f30-f5f8-466e-aff9-25556b571219", "rssi": '+final_rssi_1219+'},\n';
-              }
-              
-              if(rssi_1221.length>0){
-                var sum_1221 = rssi_1221.reduce(sum_array);
-                var mean_1221 = sum_1221 / rssi_1221.length;
-                var standat_1221 = standart_array(rssi_1221, mean_1221, sum_1221);
-                var final_rssi_1221 = final_rssi(rssi_1221, mean_1221, standat_1221);
-                elem += '{"uuid":"b9407f30-f5f8-466e-aff9-25556b571221", "rssi": '+final_rssi_1221+'},\n';
-              }
-              
-              if(rssi_1222.length>0){
-                var sum_1222 = rssi_1222.reduce(sum_array);
-                var mean_1222 = sum_1222 / rssi_1222.length;
-                var standat_1222 = standart_array(rssi_1222, mean_1222, sum_1222);
-                var final_rssi_1222 = final_rssi(rssi_1222, mean_1222, standat_1222);
-                elem += '{"uuid":"b9407f30-f5f8-466e-aff9-25556b571222", "rssi": '+final_rssi_1222+'},\n';
-              }
-              
-              if(rssi_1211.length>0){
-              var sum_1211 = rssi_1211.reduce(sum_array);
-              var mean_1211 = sum_1211 / rssi_1211.length;
-              var standat_1211 = standart_array(rssi_1211, mean_1211, sum_1211);
-              var final_rssi_1211 = final_rssi(rssi_1211, mean_1211, standat_1211);
-              
-              elem += '{"uuid":"b9407f30-f5f8-466e-aff9-25556b571211", "rssi": '+final_rssi_1211+'}\n';
-             }
+
+                    // with kalman filter
+                    kalmanFilter(rssi_1218,t_beacon,"b9407f30-f5f8-466e-aff9-25556b571218");
+                    kalmanFilter(rssi_1219,t_beacon,"b9407f30-f5f8-466e-aff9-25556b571219");
+                    kalmanFilter(rssi_1221,t_beacon,"b9407f30-f5f8-466e-aff9-25556b571221");
+                    //kalmanFilter(rssi_1222,t_beacon,"b9407f30-f5f8-466e-aff9-25556b571222");
+                   // kalmanFilter(rssi_1211,t_beacon,"b9407f30-f5f8-466e-aff9-25556b571211");
 
 
 
@@ -174,8 +140,8 @@ $scope.direction = function(){
            console.log("got the file", file);
            logOb = file;
 
-
-           var log = '{ "zone":"'+zone+'",\n "listBeacons":[\n' + elem + "]}, \n";
+            
+           var log = '{ "zone":"'+zone+'",\n "listBeacons":[\n' + t_beacon + "]}, \n";
            writeLog(log);
            readfile();
        });
@@ -199,6 +165,36 @@ function standart_array(rssi_array, mean, sum){
 
 	return Math.sqrt((1/sum)*temp);
 }
+
+
+// kalman filer
+function kalmanFilter(tableToFilter,tableToPush,uuid) {
+    console.log('i m in kalman');
+    var A = 1;
+    var H = 1;
+    var Q = 1e-6;
+    var R = 2;
+    var XK = -70;
+    var PK = 1;
+    var X;
+    var K;
+    for(var i=0; i<tableToFilter.length;i++ ){
+        //Prediction Stage
+        var XK1 = XK;
+        PK = PK + Q;
+        //Update Stage
+        K = PK / (PK + R);
+        X = XK1 + K*(tableToFilter[i] - XK1);
+        PK = (1 - K) * PK;
+        XK = X;
+    }
+    tableToPush.push({
+        "uuid": uuid,
+        "rssi": X
+    });
+    //console.log('uuid in kalman '+uuid+' rssi '+X);
+}
+
 
 // calculate the sum of some data
 function sum_array(total, sum){
